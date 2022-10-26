@@ -2376,6 +2376,8 @@ in {
 
   deep-chainmap = callPackage ../development/python-modules/deep-chainmap { };
 
+  deepchem = callPackage ../development/python-modules/deepchem { };
+
   deep_merge = callPackage ../development/python-modules/deep_merge { };
 
   deepdiff = callPackage ../development/python-modules/deepdiff { };
