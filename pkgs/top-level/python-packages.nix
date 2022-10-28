@@ -2440,6 +2440,10 @@ in {
 
   devtools = callPackage ../development/python-modules/devtools { };
 
+  dgl = callPackage ../development/python-modules/dgl {
+    inherit (pkgs.darwin.apple_sdk.frameworks) IOKit;
+  };
+
   diagrams = callPackage ../development/python-modules/diagrams { };
 
   diceware = callPackage ../development/python-modules/diceware { };
