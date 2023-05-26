@@ -1,4 +1,4 @@
-{ lib, stdenv, buildPackages, fetchurl, zlib, bzip2, perl, cpio, gawk, coreutils, ApplicationServices }:
+{ lib, stdenv, buildPackages, fetchurl, zlib, bzip2, perl, cpio, gawk, coreutils, ApplicationServices, MacOSX-SDK }:
 
 stdenv.mkDerivation rec {
   pname = "blast";
@@ -17,6 +17,7 @@ stdenv.mkDerivation rec {
     "--with-flat-makefile"
     "--without-makefile-auto-update"
     "--with-dll"  # build dynamic libraries (static are default)
+    # "--with-64"
     ];
 
   makeFlags = [ "all_projects=app/" ];
@@ -65,7 +66,9 @@ stdenv.mkDerivation rec {
 
     substituteInPlace src/build-system/configure \
         --replace /bin/pwd ${coreutils}/bin/pwd \
-        --replace /bin/ln ${coreutils}/bin/ln
+        --replace /bin/ln ${coreutils}/bin/ln \
+        --replace /usr/include/dlfcn.h ${MacOSX-SDK}/usr/include/dlfcn.h \
+        --replace LLVMClang AppleClang
 
     substituteInPlace src/build-system/configure.ac \
         --replace /bin/pwd ${coreutils}/bin/pwd \
@@ -103,7 +106,7 @@ stdenv.mkDerivation rec {
 
     # Version 2.10.0 fails on Darwin
     # See https://github.com/NixOS/nixpkgs/pull/61430
-    platforms = platforms.linux;
-    maintainers = with maintainers; [ luispedro ];
+    platforms = platforms.linux ++ platforms.darwin;
+    maintainers = with maintainers; [ luispedro natsukium ];
   };
 }

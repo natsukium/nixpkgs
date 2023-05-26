@@ -37556,6 +37556,7 @@ with pkgs;
 
   blast = callPackage ../applications/science/biology/blast {
     inherit (darwin.apple_sdk.frameworks) ApplicationServices;
+    inherit (darwin.apple_sdk) MacOSX-SDK;
   };
 
   blast-bin = callPackage ../applications/science/biology/blast/bin.nix { };
