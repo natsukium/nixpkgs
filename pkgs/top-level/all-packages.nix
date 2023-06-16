@@ -21818,6 +21818,8 @@ with pkgs;
 
   libcouchbase = callPackage ../development/libraries/libcouchbase { };
 
+  libcudf = callPackage ../development/libraries/libcudf { };
+
   libcue = callPackage ../development/libraries/libcue { };
 
   libcutl = callPackage ../development/libraries/libcutl { };
