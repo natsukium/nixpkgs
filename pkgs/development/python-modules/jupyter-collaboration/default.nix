@@ -6,6 +6,7 @@
 , hatch-nodejs-version
 , hatchling
 , pythonRelaxDepsHook
+, jsonschema
 , jupyter-events
 , jupyter-server
 , jupyter-server-fileid
@@ -18,7 +19,7 @@
 
 buildPythonPackage rec {
   pname = "jupyter-collaboration";
-  version = "1.0.1";
+  version = "1.1.0";
 
   disabled = pythonOlder "3.8";
 
@@ -27,7 +28,7 @@ buildPythonPackage rec {
   src = fetchPypi {
     pname = "jupyter_collaboration";
     inherit version;
-    hash = "sha256-cf7BpF6WSoHQJQW0IXdpCAGTdkX9RNWZ4JovTHvcPho=";
+    hash = "sha256-3OxduJ93TmbS/fKSKmVXs5vj2IZMX5MqKPTeGklFCbM=";
   };
 
   postPatch = ''
@@ -43,9 +44,11 @@ buildPythonPackage rec {
 
   pythonRelaxDeps = [
     "ypy-websocket"
+    "jsonschema"
   ];
 
   propagatedBuildInputs = [
+    jsonschema
     jupyter-events
     jupyter-server
     jupyter-server-fileid
