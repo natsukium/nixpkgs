@@ -7045,6 +7045,8 @@ self: super: with self; {
 
   munkres = callPackage ../development/python-modules/munkres { };
 
+  mup = callPackage ../development/python-modules/mup { };
+
   murmurhash = callPackage ../development/python-modules/murmurhash { };
 
   muscima = callPackage ../development/python-modules/muscima { };
