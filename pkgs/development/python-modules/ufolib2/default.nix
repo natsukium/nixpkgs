@@ -4,6 +4,7 @@
 , attrs
 , fonttools
 , pytestCheckHook
+, pythonOlder
 , setuptools-scm
 
 # optionals
@@ -16,7 +17,9 @@
 buildPythonPackage rec {
   pname = "ufolib2";
   version = "0.14.0";
-  format = "pyproject";
+  pyproject = true;
+
+  disabled = pythonOlder "3.7";
 
   src = fetchPypi {
     pname = "ufoLib2";
@@ -49,7 +52,8 @@ buildPythonPackage rec {
   meta = with lib; {
     description = "Library to deal with UFO font sources";
     homepage = "https://github.com/fonttools/ufoLib2";
-    license = licenses.mit;
+    changelog = "https://github.com/fonttools/ufoLib2/releases/tag/v${version}";
+    license = licenses.asl20;
     maintainers = with maintainers; [ ];
   };
 }
