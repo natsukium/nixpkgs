@@ -16,7 +16,7 @@
 
 buildPythonPackage rec {
   pname = "ufolib2";
-  version = "0.14.0";
+  version = "0.16.0";
   pyproject = true;
 
   disabled = pythonOlder "3.7";
@@ -24,7 +24,7 @@ buildPythonPackage rec {
   src = fetchPypi {
     pname = "ufoLib2";
     inherit version;
-    hash = "sha256-OdUJfNe3nOQyCf3nT9/5y/C8vZXnSAWiLHvZ8GXMViw=";
+    hash = "sha256-SfDcf3LMrP5/rv4NU9N5cdRWZNiwVj7zaVb6e/pVor0=";
   };
 
   nativeBuildInputs = [
