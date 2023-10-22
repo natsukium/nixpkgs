@@ -78,5 +78,7 @@ buildPythonPackage rec {
     homepage = "https://github.com/jupyterlab/jupyterlab-git";
     license = with licenses; [ bsd3 ];
     maintainers = with maintainers; [ chiroptical ];
+    # https://github.com/jupyterlab/jupyterlab-git/issues/1245
+    broken = versionAtLeast jupyterlab.version "4";
   };
 }
