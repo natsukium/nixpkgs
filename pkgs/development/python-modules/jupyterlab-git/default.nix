@@ -4,7 +4,8 @@
 , fetchPypi
 , git
 , jupyter-server
-, jupyter-packaging
+, hatch-nodejs-version
+, hatchling
 , jupyterlab
 , nbdime
 , nbformat
@@ -13,22 +14,26 @@
 , pytest-tornasync
 , pytestCheckHook
 , pythonOlder
+, traitlets
 }:
 
 buildPythonPackage rec {
   pname = "jupyterlab-git";
-  version = "0.42.0";
+  version = "0.43.0";
+  pyproject = true;
 
-  disabled = pythonOlder "3.6";
+  disabled = pythonOlder "3.7";
 
   src = fetchPypi {
     pname = "jupyterlab_git";
     inherit version;
-    hash = "sha256-GFnox6KnwKWFqsUWY0QYzMShXlH9KFSY3rRJA4RAiCk=";
+    hash = "sha256-6qV6H0fwtxIE182fMVU8w3YAW/P8hV6MwyHCgeywNlw=";
   };
 
   nativeBuildInputs = [
-    jupyter-packaging
+    hatch-nodejs-version
+    hatchling
+    jupyterlab
   ];
 
   propagatedBuildInputs = [
@@ -37,6 +42,7 @@ buildPythonPackage rec {
     git
     nbformat
     pexpect
+    traitlets
   ];
 
   nativeCheckInputs = [
