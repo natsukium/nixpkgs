@@ -1,19 +1,22 @@
 { lib
-, stdenv
 , buildPythonPackage
-, chardet
-, openpyxl
-, charset-normalizer
-, fetchPypi
-, fetchpatch
+, fetchFromGitHub
 , pythonOlder
-, pandas
-, tabulate
+, setuptools
+, chardet
 , click
+, numpy
+, openpyxl
+, pandas
 , pdfminer-six
 , pypdf
+, tabulate
+, ghostscript
+, matplotlib
 , opencv4
-, setuptools
+, pytest-mpl
+, pytest-xdist
+, pytestCheckHook
 }:
 
 buildPythonPackage rec {
@@ -23,26 +26,55 @@ buildPythonPackage rec {
 
   disabled = pythonOlder "3.7";
 
-  src = fetchPypi {
-    inherit pname version;
-    hash = "sha256-l6fZBtaF5AWaSlSaY646UfCrcqPIJlV/hEPGWhGB3+Y=";
+  src = fetchFromGitHub {
+    owner = "camelot-dev";
+    repo = "camelot";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-vR/oX3t2npPTrd7RM1GiZwryp88dlJ0fzSgPS36/QXw=";
   };
+
+  postPatch = ''
+    substituteInPlace camelot/backends/ghostscript_backend.py \
+      --replace "if not self.installed():" "if False:"
+  '';
 
   nativeBuildInputs = [ setuptools ];
 
   propagatedBuildInputs = [
-    charset-normalizer
     chardet
-    pandas
-    tabulate
     click
-    pdfminer-six
+    numpy
     openpyxl
+    pandas
+    pdfminer-six
     pypdf
-    opencv4
-  ];
+    tabulate
+  ] ++ passthru.optional-dependencies.base;
+
+  passthru.optional-dependencies = {
+    all = passthru.optional-dependencies.base ++ passthru.optional-dependencies.plot;
+    base = [
+      ghostscript
+      opencv4
+      # pdftopng
+    ];
+    plot = [
+      matplotlib
+    ];
+  };
 
   doCheck = false;
+
+  nativeCheckInputs = [
+    pytest-mpl
+    pytest-xdist
+    pytestCheckHook
+  ] ++ passthru.optional-dependencies.base;
+
+  preCheck = ''
+    substituteInPlace setup.cfg \
+      --replace "--cov-config .coveragerc --cov-report term --cov-report xml --cov=camelot" ""
+  '';
 
   pythonImportsCheck = [
     "camelot"
