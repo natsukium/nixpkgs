@@ -10,17 +10,14 @@
   perl,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "htslib";
   version = "1.20";
 
   src = fetchurl {
-    url = "https://github.com/samtools/htslib/releases/download/${version}/${pname}-${version}.tar.bz2";
+    url = "https://github.com/samtools/htslib/releases/download/${finalAttrs.version}/${finalAttrs.pname}-${finalAttrs.version}.tar.bz2";
     hash = "sha256-5S2VsU2mjgz9fSf69W/vL4jC6vMqK+UccuFG46qShUQ=";
   };
-
-  # perl is only used during the check phase.
-  nativeBuildInputs = [ perl ];
 
   buildInputs = [
     zlib
@@ -54,6 +51,8 @@ stdenv.mkDerivation rec {
     install -D bgzip htsfile tabix $out/bin
   '';
 
+  nativeCheckInputs = [ perl ];
+
   preCheck = ''
     patchShebangs test/
   '';
@@ -69,4 +68,4 @@ stdenv.mkDerivation rec {
     platforms = platforms.unix;
     maintainers = [ maintainers.mimame ];
   };
-}
+})
