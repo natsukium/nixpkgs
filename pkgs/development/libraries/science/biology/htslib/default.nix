@@ -5,17 +5,18 @@
   zlib,
   bzip2,
   xz,
+  libdeflate,
   curl,
   perl,
 }:
 
 stdenv.mkDerivation rec {
   pname = "htslib";
-  version = "1.19.1";
+  version = "1.20";
 
   src = fetchurl {
     url = "https://github.com/samtools/htslib/releases/download/${version}/${pname}-${version}.tar.bz2";
-    sha256 = "sha256-Ii1001dPtnsVjGmIyYDuqrqKBlb15P+3a1+lfwNZM+w=";
+    hash = "sha256-5S2VsU2mjgz9fSf69W/vL4jC6vMqK+UccuFG46qShUQ=";
   };
 
   # perl is only used during the check phase.
@@ -26,6 +27,7 @@ stdenv.mkDerivation rec {
     bzip2
     xz
     curl
+    libdeflate
   ];
 
   configureFlags =
