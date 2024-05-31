@@ -8,6 +8,7 @@
   numpy,
   pandas,
   pynose,
+  pytest-sandbox,
   pytestCheckHook,
   pythonRelaxDepsHook,
 }:
@@ -39,16 +40,8 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [
     pynose
+    pytest-sandbox
     pytestCheckHook
-  ];
-
-  disabledTests = [
-    # require network access
-    "test_mmcif_pdb_conversion"
-    "test_fetch_pdb"
-    "test_write_mmtf_bp"
-    "test_write_mmtf"
-    "test_b_factor_shift"
   ];
 
   pythonImportsCheck = [ "biopandas" ];
