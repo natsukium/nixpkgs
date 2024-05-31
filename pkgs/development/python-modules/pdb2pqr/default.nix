@@ -9,6 +9,7 @@
   propka,
   requests,
   docutils,
+  pytest-sandbox,
   pytestCheckHook,
   pandas,
   testfixtures,
@@ -39,21 +40,10 @@ buildPythonPackage rec {
   ];
 
   nativeCheckInputs = [
+    pytest-sandbox
     pytestCheckHook
     pandas
     testfixtures
-  ];
-
-  disabledTests = [
-    # these tests have network access
-    "test_short_pdb"
-    "test_basic_cif"
-    "test_long_pdb"
-    "test_ligand_biomolecule"
-    "test_log_output_in_pqr_location"
-    "test_propka_apo"
-    "test_propka_pka"
-    "test_basic"
   ];
 
   pythonImportsCheck = [ "pdb2pqr" ];
