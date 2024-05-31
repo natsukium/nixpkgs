@@ -30,6 +30,7 @@
   pydantic,
   pypika,
   pytest-asyncio,
+  pytest-sandbox,
   pytestCheckHook,
   pythonOlder,
   pythonRelaxDepsHook,
@@ -120,6 +121,7 @@ buildPythonPackage rec {
   nativeCheckInputs = [
     hypothesis
     pytest-asyncio
+    pytest-sandbox
     pytestCheckHook
   ];
 
@@ -139,11 +141,6 @@ buildPythonPackage rec {
   disabledTestPaths = [
     # Tests require network access
     "chromadb/test/property/test_cross_version_persist.py"
-    "chromadb/test/auth/test_simple_rbac_authz.py"
-    "chromadb/test/ef/test_default_ef.py"
-    "chromadb/test/test_api.py"
-    "chromadb/test/property/"
-    "chromadb/test/stress/"
   ];
 
   __darwinAllowLocalNetworking = true;
