@@ -13,6 +13,7 @@
   pymongo-inmemory,
   pandas,
   birch,
+  pytest-sandbox,
 }:
 
 buildPythonPackage rec {
@@ -49,6 +50,7 @@ buildPythonPackage rec {
   '';
 
   nativeCheckInputs = [
+    pytest-sandbox
     pytestCheckHook
     pymongo
     dnspython
@@ -58,16 +60,6 @@ buildPythonPackage rec {
   ];
 
   disabledTests = [
-    # touches network
-    "test_mongetter_default_param"
-    "test_stale_after_applies_dynamically"
-    "test_next_time_applies_dynamically"
-    "test_wait_for_calc_"
-    "test_precache_value"
-    "test_ignore_self_in_methods"
-    "test_mongo_index_creation"
-    "test_mongo_core"
-
     # don't test formatting
     "test_flake8"
   ];
