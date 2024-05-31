@@ -10,6 +10,7 @@
   pg8000,
   pillow,
   pydantic,
+  pytest-sandbox,
   pytestCheckHook,
   pythonOlder,
   pythonRelaxDepsHook,
@@ -85,6 +86,7 @@ buildPythonPackage rec {
   };
 
   nativeCheckInputs = [
+    pytest-sandbox
     pytestCheckHook
   ] ++ lib.flatten (lib.attrValues passthru.optional-dependencies);
 
@@ -102,13 +104,6 @@ buildPythonPackage rec {
     "test_init"
     "test_key_get_and_set"
     "test_get"
-    # Tests require network access
-    "test_abatch_run"
-    "test_batch_run"
-    "test_retry_handling"
-    "test_run_chat"
-    "test_run"
-    "test_score_run"
     # Test is time-senstive
     "test_timing"
   ];
