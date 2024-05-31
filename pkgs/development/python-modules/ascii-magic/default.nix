@@ -4,6 +4,7 @@
   colorama,
   fetchPypi,
   pillow,
+  pytest-sandbox,
   pytestCheckHook,
   pythonOlder,
 }:
@@ -26,7 +27,10 @@ buildPythonPackage rec {
     pillow
   ];
 
-  nativeCheckInputs = [ pytestCheckHook ];
+  nativeCheckInputs = [
+    pytest-sandbox
+    pytestCheckHook
+  ];
 
   pythonImportsCheck = [ "ascii_magic" ];
 
@@ -35,10 +39,6 @@ buildPythonPackage rec {
   '';
 
   disabledTests = [
-    # Test requires network access
-    "test_from_url"
-    "test_quick_test"
-    "test_wrong_url"
     # No clipboard in the sandbox
     "test_from_clipboard"
   ];
