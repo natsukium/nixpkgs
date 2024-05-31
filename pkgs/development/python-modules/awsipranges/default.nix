@@ -4,6 +4,7 @@
   fetchFromGitHub,
   poetry-core,
   pyopenssl,
+  pytest-sandbox,
   pytestCheckHook,
   pythonOlder,
 }:
@@ -26,17 +27,11 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [
     pyopenssl
+    pytest-sandbox
     pytestCheckHook
   ];
 
   pythonImportsCheck = [ "awsipranges" ];
-
-  disabledTestPaths = [
-    # Tests require network access
-    "tests/data/test_syntax_and_semantics.py"
-    "tests/integration/test_package_apis.py"
-    "tests/unit/test_data_loading.py"
-  ];
 
   meta = with lib; {
     description = "Module to work with the AWS IP address ranges";
