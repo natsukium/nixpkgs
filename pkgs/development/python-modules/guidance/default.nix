@@ -18,9 +18,11 @@
   platformdirs,
   protobuf,
   pyformlang,
+  pytest-sandbox,
   requests,
   tiktoken,
   torch,
+  transformers,
   uvicorn,
 }:
 
@@ -63,27 +65,10 @@ buildPythonPackage rec {
   ];
 
   nativeCheckInputs = [
+    pytest-sandbox
     pytestCheckHook
     torch
-  ];
-
-  disabledTests = [
-    # require network access
-    "test_select_simple"
-    "test_commit_point"
-    "test_token_healing"
-    "test_fstring"
-    "test_fstring_custom"
-    "test_token_count"
-    "test_gpt2"
-    "test_recursion_error"
-    "test_openai_class_detection"
-    "test_openai_chat_without_roles"
-  ];
-
-  disabledTestPaths = [
-    # require network access
-    "tests/library/test_gen.py"
+    transformers
   ];
 
   preCheck = ''
