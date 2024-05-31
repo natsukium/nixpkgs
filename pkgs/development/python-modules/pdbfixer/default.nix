@@ -6,6 +6,7 @@
   wheel,
   numpy,
   openmm,
+  pytest-sandbox,
   pytestCheckHook,
 }:
 
@@ -31,21 +32,17 @@ buildPythonPackage rec {
     openmm
   ];
 
-  nativeCheckInputs = [ pytestCheckHook ];
+  nativeCheckInputs = [
+    pytest-sandbox
+    pytestCheckHook
+  ];
 
   preCheck = ''
     export PATH=$out/bin:$PATH
   '';
 
   disabledTests = [
-    # require network access
-    "test_build_and_simulate"
-    "test_mutate_1"
-    "test_mutate_2"
-    "test_mutate_3_fails"
-    "test_mutate_4_fails"
-    "test_mutate_5_fails"
-    "test_mutate_multiple_copies_of_chain_A"
+    # cli tests require network access
     "test_pdbid"
     "test_url"
   ];
