@@ -27,6 +27,7 @@
   pydantic,
   pytest-asyncio,
   pytest-mock,
+  pytest-sandbox,
   pytest-socket,
   pytestCheckHook,
   pythonOlder,
@@ -125,6 +126,7 @@ buildPythonPackage rec {
     pandas
     pytest-asyncio
     pytest-mock
+    pytest-sandbox
     pytest-socket
     pytestCheckHook
     requests-mock
@@ -143,10 +145,6 @@ buildPythonPackage rec {
     # These tests have database access
     "test_table_info"
     "test_sql_database_run"
-    # These tests have network access
-    "test_socket_disabled"
-    "test_openai_agent_with_streaming"
-    "test_openai_agent_tools_agent"
     # This test may require a specific version of langchain-community
     "test_compatible_vectorstore_documentation"
     # AssertionErrors
