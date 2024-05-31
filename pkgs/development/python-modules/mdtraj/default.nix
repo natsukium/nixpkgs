@@ -18,6 +18,7 @@
   gsd,
   networkx,
   pandas,
+  pytest-sandbox,
   pytest-xdist,
   pytestCheckHook,
   tables,
@@ -88,6 +89,7 @@ buildPythonPackage rec {
     gsd
     networkx
     pandas
+    pytest-sandbox
     pytest-xdist
     pytestCheckHook
     tables
@@ -99,10 +101,6 @@ buildPythonPackage rec {
   '';
 
   disabledTests = [
-    # require network access
-    "test_pdb_from_url"
-    "test_1vii_url_and_gz"
-
     # fail due to data race
     "test_read_atomindices_1"
     "test_read_atomindices_2"
