@@ -30,6 +30,7 @@
   #, pystan (not packaged)
   numpyro,
   bokeh,
+  pytest-sandbox,
 }:
 
 buildPythonPackage rec {
@@ -76,6 +77,7 @@ buildPythonPackage rec {
     # pymc3 (circular dependency)
     pyro-ppl
     # pystan (not packaged)
+    pytest-sandbox
     pytestCheckHook
     torchvision
     zarr
@@ -89,11 +91,6 @@ buildPythonPackage rec {
   pytestFlagsArray = [ "arviz/tests/base_tests/" ];
 
   disabledTests = [
-    # Tests require network access
-    "test_plot_ppc_transposed"
-    "test_plot_separation"
-    "test_plot_trace_legend"
-    "test_cov"
     # countourpy is not available at the moment
     "test_plot_kde"
     "test_plot_kde_2d"
