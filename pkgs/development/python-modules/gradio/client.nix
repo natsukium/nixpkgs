@@ -20,6 +20,7 @@
   websockets,
   # checkInputs
   pytestCheckHook,
+  pytest-sandbox,
   pytest-asyncio,
   pydub,
   rich,
@@ -73,6 +74,7 @@ buildPythonPackage rec {
   nativeCheckInputs = [
     pytestCheckHook
     pytest-asyncio
+    pytest-sandbox
     pydub
     rich
     tomlkit
@@ -81,16 +83,20 @@ buildPythonPackage rec {
   # ensuring we don't propagate this intermediate build
   disallowedReferences = [ gradio.sans-reverse-dependencies ];
 
-  # Add a pytest hook skipping tests that access network, marking them as "Expected fail" (xfail).
   preCheck = ''
     export HOME=$TMPDIR
-    cat ${./conftest-skip-network-errors.py} >> test/conftest.py
   '';
 
   pytestFlagsArray = [
     "test/"
     "-m 'not flaky'"
     #"-x" "-W" "ignore" # uncomment for debugging help
+  ];
+
+  disabledTests = [
+    # file not found
+    "test_encode_url_or_file_to_base64"
+    "test_encode_file_to_base64"
   ];
 
   pythonImportsCheck = [ "gradio_client" ];

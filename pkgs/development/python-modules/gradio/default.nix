@@ -53,6 +53,7 @@
   ffmpeg,
   ipython,
   pytest-asyncio,
+  pytest-sandbox,
   respx,
   scikit-image,
   torch,
@@ -140,6 +141,7 @@ buildPythonPackage rec {
     ffmpeg
     ipython
     pytest-asyncio
+    pytest-sandbox
     respx
     scikit-image
     # shap is needed as well, but breaks too often
@@ -152,12 +154,9 @@ buildPythonPackage rec {
     (writeShellScriptBin "npm" "false")
   ] ++ passthru.optional-dependencies.oauth ++ pydantic.passthru.optional-dependencies.email;
 
-  # Add a pytest hook skipping tests that access network, marking them as "Expected fail" (xfail).
-  # We additionally xfail FileNotFoundError, since the gradio devs often fail to upload test assets to pypi.
   preCheck =
     ''
       export HOME=$TMPDIR
-      cat ${./conftest-skip-network-errors.py} >> test/conftest.py
     ''
     + lib.optionalString stdenv.isDarwin ''
       # OSError: [Errno 24] Too many open files
@@ -183,17 +182,15 @@ buildPythonPackage rec {
     # shap is too often broken in nixpkgs
     "test_shapley_text"
 
-    # fails without network
-    "test_download_if_url_correct_parse"
-
     # tests if pip and other tools are installed
     "test_get_executable_path"
   ];
   disabledTestPaths = [
-    # 100% touches network
-    "test/test_networking.py"
     # makes pytest freeze 50% of the time
     "test/test_interfaces.py"
+
+    # The gradio devs often fail to upload test assets to pypi.
+    "test/test_reload.py"
   ];
   pytestFlagsArray = [
     "-x" # abort on first failure
