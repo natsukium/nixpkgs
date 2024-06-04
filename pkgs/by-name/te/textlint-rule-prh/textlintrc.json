@@ -1,0 +1,1 @@
+{ "rules": { "prh": { "rulePaths": ["./prh-rule.yaml"] } } }
