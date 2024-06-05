@@ -4,6 +4,7 @@
   fetchFromGitHub,
   freezegun,
   mock,
+  pytest-sandbox,
   pytestCheckHook,
   pythonOlder,
   pytz,
@@ -38,22 +39,12 @@ buildPythonPackage rec {
   nativeCheckInputs = [
     freezegun
     mock
+    pytest-sandbox
     pytestCheckHook
     pytz
   ];
 
   pythonImportsCheck = [ "duo_client" ];
-
-  disabledTests = [
-    # Tests require network access
-    "test_server_hostname"
-    "test_server_hostname_with_port"
-    "test_get_billing_edition"
-    "test_get_telephony_credits"
-    "test_set_business_billing_edition"
-    "test_set_enterprise_billing_edition"
-    "test_set_telephony_credits"
-  ];
 
   meta = with lib; {
     description = "Python library for interacting with the Duo Auth, Admin, and Accounts APIs";
