@@ -8,6 +8,7 @@
   poetry-core,
   pytestCheckHook,
   pytest-asyncio,
+  pytest-sandbox,
   python-dateutil,
   pythonOlder,
   rapidfuzz,
@@ -61,6 +62,7 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [
     pytest-asyncio
+    pytest-sandbox
     pytestCheckHook
     time-machine
   ] ++ lib.flatten (builtins.attrValues passthru.optional-dependencies);
@@ -68,10 +70,8 @@ buildPythonPackage rec {
   pythonImportsCheck = [ "avwx" ];
 
   disabledTests = [
-    # Tests require network access
-    "fetch"
+    # depends on other tests that require network access
     "test_nbm_all"
-    "test_station_nearest_ip"
   ];
 
   meta = with lib; {
