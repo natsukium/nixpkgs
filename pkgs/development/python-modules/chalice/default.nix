@@ -11,6 +11,7 @@
   mock,
   mypy-extensions,
   pip,
+  pytest-sandbox,
   pytest7CheckHook,
   pythonOlder,
   pyyaml,
@@ -62,6 +63,7 @@ buildPythonPackage rec {
   nativeCheckInputs = [
     hypothesis
     mock
+    pytest-sandbox
     pytest7CheckHook
     requests
     websocket-client
@@ -73,15 +75,11 @@ buildPythonPackage rec {
     "docs/source/samples/todo-app/code/tests/test_db.py"
     # Requires credentials
     "tests/aws/test_features.py"
-    # Requires network access
-    "tests/aws/test_websockets.py"
+    # Requires specific version dependencies
     "tests/integration/test_package.py"
   ];
 
   disabledTests = [
-    # Requires network access
-    "test_update_domain_name_failed"
-    "test_can_reload_server"
     # Content for the tests is missing
     "test_can_import_env_vars"
     "test_stack_trace_printed_on_error"
