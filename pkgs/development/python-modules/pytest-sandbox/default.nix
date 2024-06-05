@@ -15,8 +15,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "natsukium";
     repo = "pytest-sandbox";
-    rev = "237992b892f289f380bb8a629bef35ed56bfd843";
-    hash = "sha256-UUo/y8GwkGt59CMuFRdwKbnf0raFLr4mE2NuiNfAHFI=";
+    rev = "1382273a7b24bfd4ac4a7fc5fdb1568069dd7cb1";
+    hash = "sha256-br6NLisnOM5fxgOucPa0t49QKk6Pk58st+KzO2PwhrU=";
   };
 
   build-system = [ pdm-backend ];
