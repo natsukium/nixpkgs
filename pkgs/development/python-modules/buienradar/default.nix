@@ -8,6 +8,7 @@
   setuptools,
   vincenty,
   xmltodict,
+  pytest-sandbox,
   pytestCheckHook,
 }:
 
@@ -33,13 +34,9 @@ buildPythonPackage rec {
     xmltodict
   ];
 
-  nativeCheckInputs = [ pytestCheckHook ];
-
-  disabledTests = [
-    # require network connection
-    "test_rain_data"
-    "test_json_data"
-    "test_xml_data"
+  nativeCheckInputs = [
+    pytest-sandbox
+    pytestCheckHook
   ];
 
   pythonImportsCheck = [
