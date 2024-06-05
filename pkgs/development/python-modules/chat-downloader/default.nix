@@ -7,6 +7,7 @@
   docstring-parser,
   colorlog,
   websocket-client,
+  pytest-sandbox,
   pytestCheckHook,
 }:
 
@@ -28,10 +29,15 @@ buildPythonPackage rec {
     websocket-client
   ];
 
-  # Tests try to access the network.
-  doCheck = false;
+  disabledTestPaths = [
+    # require network access in pytest collection hook
+    "tests/test_generators.py"
+  ];
 
-  nativeCheckInputs = [ pytestCheckHook ];
+  nativeCheckInputs = [
+    pytest-sandbox
+    pytestCheckHook
+  ];
 
   pythonImportsCheck = [ "chat_downloader" ];
 
