@@ -14,6 +14,7 @@
   pyramid,
   pyramid-jinja2,
   pysocks,
+  pytest-sandbox,
   pytestCheckHook,
   pythonOlder,
   pythonRelaxDepsHook,
@@ -71,6 +72,7 @@ buildPythonPackage rec {
   ];
 
   nativeCheckInputs = [
+    pytest-sandbox
     pytestCheckHook
     webtest
   ];
@@ -83,20 +85,6 @@ buildPythonPackage rec {
   disabledTestPaths = [
     # performance test
     "tests/unit/tools/pbkdf2_test.py"
-    # tests require network connection
-    "tests/network/explorers/bitcoin"
-    "tests/network/monero/monero_address_transactions_db_test.py"
-    "tests/network/net/http_client"
-    "tests/network/prices"
-    # tests require bitcoind running
-    "tests/network/full_node_clients"
-    # tests require lnd running
-    "tests/network/ln"
-    # tests require tor running
-    "tests/network/monero/monero_test.py"
-    "tests/network/net/tor_client"
-    "tests/network/usecases/calc_monero_address_credits_uc_test.py"
-    "tests/network/usecases/fetch_monero_txs_from_open_node_uc_test.py"
     # tests require the full environment running
     "tests/acceptance/views"
     "tests/acceptance/views_admin"
