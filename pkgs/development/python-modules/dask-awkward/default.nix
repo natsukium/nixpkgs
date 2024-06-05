@@ -12,6 +12,7 @@
   hist,
   pandas,
   pyarrow,
+  pytest-sandbox,
   pytestCheckHook,
   pythonOlder,
   pythonRelaxDepsHook,
@@ -57,6 +58,7 @@ buildPythonPackage rec {
     distributed
     hist
     pandas
+    pytest-sandbox
     pytestCheckHook
     uproot
   ] ++ lib.flatten (builtins.attrValues passthru.optional-dependencies);
@@ -64,10 +66,6 @@ buildPythonPackage rec {
   pythonImportsCheck = [ "dask_awkward" ];
 
   disabledTests = [
-    # Tests require network access
-    "test_remote_double"
-    "test_remote_single"
-    "test_from_text"
     # ValueError: not a ROOT file: first four bytes...
     "test_basic_root_works"
   ];
