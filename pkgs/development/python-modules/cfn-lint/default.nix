@@ -10,6 +10,7 @@
   mock,
   networkx,
   pydot,
+  pytest-sandbox,
   pytestCheckHook,
   pythonOlder,
   pyyaml,
@@ -50,6 +51,7 @@ buildPythonPackage rec {
   nativeCheckInputs = [
     mock
     pydot
+    pytest-sandbox
     pytestCheckHook
   ];
 
@@ -60,10 +62,6 @@ buildPythonPackage rec {
   disabledTests = [
     # Requires git directory
     "test_update_docs"
-    # Tests depend on network access (fails in getaddrinfo)
-    "test_update_resource_specs_python_2"
-    "test_update_resource_specs_python_3"
-    "test_sarif_formatter"
     # Some CLI tests fails
     "test_bad_config"
     "test_override_parameters"
