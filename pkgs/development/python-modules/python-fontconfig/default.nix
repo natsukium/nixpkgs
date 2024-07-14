@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   cython,
   fetchPypi,
   fetchpatch,
@@ -16,6 +17,10 @@ in
 buildPythonPackage rec {
   pname = "python-fontconfig";
   version = "0.5.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "Python-fontconfig";
