@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   pyperclip,
   fetchFromGitHub,
   xlib,
@@ -9,6 +10,10 @@
 buildPythonPackage {
   pname = "mouseinfo";
   version = "0.1.3";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "asweigart";
@@ -26,7 +31,7 @@ buildPythonPackage {
   # Mouseinfo requires a X server running to import successfully
   # pythonImportsCheck = [ "mouseinfo" ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     pyperclip
     xlib
     pillow
