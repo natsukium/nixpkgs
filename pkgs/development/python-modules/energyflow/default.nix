@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   h5py,
   numpy,
@@ -12,6 +13,10 @@
 buildPythonPackage rec {
   pname = "energyflow";
   version = "1.3.3";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "pkomiske";
@@ -26,7 +31,7 @@ buildPythonPackage rec {
       --replace "pytest-runner" ""
   '';
 
-  propagatedBuildInputs = [
+  dependencies = [
     h5py
     numpy
     six
