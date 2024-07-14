@@ -1,12 +1,17 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
 }:
 
 buildPythonPackage rec {
   pname = "autologging";
   version = "1.3.2";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "Autologging";
