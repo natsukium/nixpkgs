@@ -21,7 +21,7 @@
 buildPythonPackage rec {
   pname = "raincloudy";
   version = "1.2.0";
-  pypriject = true;
+  pyproject = true;
 
   # https://github.com/vanstinator/raincloudy/issues/65
   disabled = pythonOlder "3.7" || pythonAtLeast "3.12";
