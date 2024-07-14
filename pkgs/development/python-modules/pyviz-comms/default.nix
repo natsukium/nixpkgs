@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   lib,
   param,
@@ -10,12 +11,16 @@ buildPythonPackage rec {
   pname = "pyviz_comms";
   version = "2.2.1";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-omFFuM5D0tk0s8aCbXe5E84QXFKOsuSUyJCz41Jd3zM=";
   };
 
-  propagatedBuildInputs = [ param ];
+  dependencies = [ param ];
 
   # there are not tests with the package
   doCheck = false;
