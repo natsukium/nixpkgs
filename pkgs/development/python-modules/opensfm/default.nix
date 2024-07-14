@@ -2,6 +2,7 @@
   lib,
   stdenv,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   cmake,
   opencv4,
@@ -41,6 +42,10 @@ in
 buildPythonPackage rec {
   pname = "opensfm";
   version = "unstable-2023-12-09";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "mapillary";
@@ -83,7 +88,7 @@ buildPythonPackage rec {
     glog
     pybind11
   ];
-  propagatedBuildInputs = [
+  dependencies = [
     numpy
     scipy
     pyyaml
