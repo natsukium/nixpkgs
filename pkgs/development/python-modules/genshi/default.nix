@@ -10,6 +10,10 @@ buildPythonPackage rec {
   pname = "genshi";
   version = "0.7.9";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "Genshi";
     inherit version;
@@ -20,7 +24,7 @@ buildPythonPackage rec {
   # FAIL: test_sanitize_remove_src_javascript (genshi.filters.tests.html.HTMLSanitizerTestCase)
   doCheck = false;
 
-  propagatedBuildInputs = [
+  dependencies = [
     setuptools
     six
   ];
