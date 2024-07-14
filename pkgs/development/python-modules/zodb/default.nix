@@ -2,6 +2,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   python,
   zope-testrunner,
   transaction,
@@ -19,6 +20,10 @@ buildPythonPackage rec {
   pname = "zodb";
   version = "6.0";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "ZODB";
     inherit version;
@@ -30,7 +35,7 @@ buildPythonPackage rec {
     rm -vf src/ZODB/tests/testdocumentation.py
   '';
 
-  propagatedBuildInputs = [
+  dependencies = [
     transaction
     six
     zope-interface
