@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   markdown,
   python,
@@ -10,6 +11,10 @@ buildPythonPackage rec {
   pname = "mdx_truly_sane_lists";
   version = "1.3";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "radude";
     repo = "mdx_truly_sane_lists";
@@ -17,7 +22,7 @@ buildPythonPackage rec {
     hash = "sha256-hPnqF1UA4peW8hzeFiMlsBPfodC1qJXETGoq2yUm7d4=";
   };
 
-  propagatedBuildInputs = [ markdown ];
+  dependencies = [ markdown ];
 
   pythonImportsCheck = [ "mdx_truly_sane_lists" ];
 
