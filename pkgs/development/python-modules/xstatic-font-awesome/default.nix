@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   lib,
   fetchPypi,
 }:
@@ -7,6 +8,10 @@
 buildPythonPackage rec {
   pname = "xstatic-font-awesome";
   version = "6.2.1.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "XStatic-Font-Awesome";
