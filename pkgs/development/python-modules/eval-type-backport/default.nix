@@ -11,6 +11,8 @@ buildPythonPackage rec {
   pname = "eval-type-backport";
   version = "0.1.3";
 
+  pyproject = true;
+
   src = fetchFromGitHub {
     owner = "alexmojaki";
     repo = "eval_type_backport";
@@ -18,7 +20,7 @@ buildPythonPackage rec {
     hash = "sha256-EiYJQUnK10lqjyJ89KacbZ+ZZuOmkRQ9bqTFQFN2iMA=";
   };
 
-  nativeBuildInputs = [
+  build-system = [
     setuptools
     setuptools-scm
   ];
