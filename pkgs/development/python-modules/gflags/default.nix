@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   six,
   pytest,
@@ -10,6 +11,10 @@ buildPythonPackage rec {
   version = "3.1.2";
   pname = "python-gflags";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     sha256 = "40ae131e899ef68e9e14aa53ca063839c34f6a168afe622217b5b875492a1ee2";
@@ -17,7 +22,7 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [ pytest ];
 
-  propagatedBuildInputs = [ six ];
+  dependencies = [ six ];
 
   checkPhase = ''
     # clashes with our pythhon wrapper (which is in argv0)
