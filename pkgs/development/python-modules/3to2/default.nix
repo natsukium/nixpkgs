@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pytest,
 }:
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   pname = "py3to2";
   version = "1.1.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit version;
