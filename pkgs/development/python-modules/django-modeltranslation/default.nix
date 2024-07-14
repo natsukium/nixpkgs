@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   pythonOlder,
   django,
@@ -17,6 +18,10 @@ in
 buildPythonPackage {
   pname = "django-modeltranslation";
   inherit version;
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "deschler";
@@ -35,7 +40,7 @@ buildPythonPackage {
 
   disabled = pythonOlder "3.6";
 
-  propagatedBuildInputs = [ django ];
+  dependencies = [ django ];
 
   nativeCheckInputs = [
     django-stubs
