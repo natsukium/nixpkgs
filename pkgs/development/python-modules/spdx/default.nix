@@ -2,12 +2,17 @@
   lib,
   fetchFromGitHub,
   buildPythonPackage,
+  setuptools,
   nix-update-script,
 }:
 
 buildPythonPackage rec {
   pname = "spdx";
   version = "2.5";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "bbqsrc";
