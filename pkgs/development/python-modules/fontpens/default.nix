@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   fonttools,
 }:
@@ -9,6 +10,10 @@ buildPythonPackage rec {
   pname = "fontpens";
   version = "0.2.4";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "fontPens";
     inherit version;
@@ -16,7 +21,7 @@ buildPythonPackage rec {
     extension = "zip";
   };
 
-  propagatedBuildInputs = [ fonttools ];
+  dependencies = [ fonttools ];
 
   # can't run normal tests due to circular dependency with fontParts
   doCheck = false;
