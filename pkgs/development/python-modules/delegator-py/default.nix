@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   lib,
   fetchFromGitHub,
   pexpect,
@@ -9,6 +10,10 @@ buildPythonPackage rec {
   version = "0.1.1";
   pname = "delegator.py";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "amitt001";
     repo = "delegator.py";
@@ -16,7 +21,7 @@ buildPythonPackage rec {
     sha256 = "17n9h3xzjsfxmwclh33vc4yg3c9yzh9hfhaj12kv5ah3fy8rklwb";
   };
 
-  propagatedBuildInputs = [ pexpect ];
+  dependencies = [ pexpect ];
 
   # no tests in github or pypi
   doCheck = false;
