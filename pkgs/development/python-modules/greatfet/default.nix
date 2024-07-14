@@ -2,6 +2,7 @@
   lib,
   fetchFromGitHub,
   buildPythonPackage,
+  setuptools,
   isPy3k,
   future,
   pyusb,
@@ -13,6 +14,10 @@ buildPythonPackage rec {
   pname = "greatfet";
   version = "2024.0.1";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "greatscottgadgets";
     repo = "greatfet";
@@ -22,7 +27,7 @@ buildPythonPackage rec {
 
   disabled = !isPy3k;
 
-  propagatedBuildInputs = [
+  dependencies = [
     future
     pyusb
     ipython
