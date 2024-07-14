@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   pytestCheckHook,
   pythonOlder,
@@ -10,6 +11,10 @@ buildPythonPackage rec {
   pname = "class-registry";
   version = "4.1.0";
   disabled = pythonOlder "3.5";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "todofixthis";
