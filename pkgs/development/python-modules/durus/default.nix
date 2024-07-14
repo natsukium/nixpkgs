@@ -2,12 +2,17 @@
   stdenv,
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
 }:
 
 buildPythonPackage rec {
   pname = "durus";
   version = "4.2";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "Durus";
