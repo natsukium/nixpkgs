@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   regex,
 }:
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   pname = "re_assert";
   version = "1.1.0";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
@@ -17,7 +22,7 @@ buildPythonPackage rec {
   # No tests in archive
   doCheck = false;
 
-  propagatedBuildInputs = [ regex ];
+  dependencies = [ regex ];
 
   meta = {
     description = "Show where your regex match assertion failed";
