@@ -11,6 +11,10 @@ buildPythonPackage rec {
   pname = "capstone";
   version = lib.getVersion capstone;
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = capstone.src;
   sourceRoot = "${src.name}/bindings/python";
   patches = [
@@ -38,7 +42,7 @@ buildPythonPackage rec {
     "macosx_11_0"
   ];
 
-  propagatedBuildInputs = [ setuptools ];
+  dependencies = [ setuptools ];
 
   checkPhase = ''
     mv capstone capstone.hidden
