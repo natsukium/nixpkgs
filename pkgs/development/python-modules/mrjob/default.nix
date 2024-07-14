@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   pythonAtLeast,
   fetchFromGitHub,
 
@@ -30,6 +31,10 @@ buildPythonPackage rec {
   # https://github.com/Yelp/mrjob/issues/2222
   disabled = pythonAtLeast "3.12";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "Yelp";
     repo = "mrjob";
@@ -37,7 +42,7 @@ buildPythonPackage rec {
     hash = "sha256-Yp4yUx6tkyGB622I9y+AWK2AkIDVGKQPMM+LtB/M3uo=";
   };
 
-  propagatedBuildInputs = [ pyyaml ];
+  dependencies = [ pyyaml ];
 
   passthru.optional-dependencies = {
     aws = [
