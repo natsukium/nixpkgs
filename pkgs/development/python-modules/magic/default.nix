@@ -2,11 +2,16 @@
   lib,
   stdenv,
   buildPythonPackage,
+  setuptools,
   pkgs,
 }:
 
 buildPythonPackage {
   name = pkgs.file.name;
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = pkgs.file.src;
 
