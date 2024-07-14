@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   numpy,
   h5py,
@@ -9,6 +10,10 @@
 buildPythonPackage rec {
   pname = "keras-applications";
   version = "1.0.8";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "Keras_Applications";
@@ -24,7 +29,7 @@ buildPythonPackage rec {
   # No tests in PyPI tarball
   doCheck = false;
 
-  propagatedBuildInputs = [
+  dependencies = [
     numpy
     h5py
   ];
