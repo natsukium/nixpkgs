@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   isPyPy,
   ply,
@@ -13,12 +14,16 @@ buildPythonPackage rec {
   version = "1.4.0";
   disabled = isPyPy;
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     sha256 = "05c471281c45ae113f6103d1268ec7a4831a2e96aa80de45edc89b11fac4fbec";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     ply
     six
     decorator
