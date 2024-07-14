@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   pytestCheckHook,
   six,
@@ -9,6 +10,10 @@
 buildPythonPackage rec {
   pname = "pyscss";
   version = "1.4.0";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     repo = "pyScss";
@@ -19,7 +24,7 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [ pytestCheckHook ];
 
-  propagatedBuildInputs = [ six ];
+  dependencies = [ six ];
 
   # Test suite is broken.
   # See https://github.com/Kronuz/pyScss/issues/415
