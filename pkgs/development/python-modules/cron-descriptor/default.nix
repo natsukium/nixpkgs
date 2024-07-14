@@ -2,6 +2,7 @@
   lib,
   python,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   mock,
   pytestCheckHook,
@@ -10,6 +11,10 @@
 buildPythonPackage rec {
   pname = "cron_descriptor";
   version = "1.4";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "Salamek";
