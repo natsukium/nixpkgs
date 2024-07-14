@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   lib,
   fetchPypi,
 }:
@@ -7,6 +8,10 @@
 buildPythonPackage rec {
   pname = "xstatic-pygments";
   version = "2.9.0.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "XStatic-Pygments";
