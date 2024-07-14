@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   pytestCheckHook,
 }:
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   pname = "oncalendar";
   version = "1.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "cuu508";
