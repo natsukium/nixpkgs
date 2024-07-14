@@ -12,12 +12,16 @@ buildPythonPackage rec {
 
   disabled = isPy27; # namespace is broken for python2
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     sha256 = "5026853fcbf6f91d5a6b11ea7860a641fe27b36d4172c731f4aa16b900cf8464";
   };
 
-  propagatedBuildInputs = [ setuptools ];
+  dependencies = [ setuptools ];
 
   meta = with lib; {
     description = "Self-contained, easily reusable library for parsing, manipulating";
