@@ -1,12 +1,17 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
 }:
 
 buildPythonPackage {
   pname = "bugz-0.9.3";
   version = "0.13";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "williamh";
