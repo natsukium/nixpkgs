@@ -2,6 +2,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   cryptography,
   libnacl,
   aiohttp,
@@ -18,12 +19,16 @@ buildPythonPackage rec {
   pname = "pyipv8";
   version = "2.13.0";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-Qp5vqMa7kfSp22C5KAUvut+4YbSXMEZRsHsLevB4QvE=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     cryptography
     libnacl
     aiohttp
