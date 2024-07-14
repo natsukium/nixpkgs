@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   isPy3k,
   twisted,
@@ -11,13 +12,17 @@ buildPythonPackage rec {
   version = "0.14.5";
   disabled = isPy3k;
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "Nevow";
     inherit version;
     sha256 = "afb6ba85a5351953578c018fcdb9dfbd62f29a8d46c58bc9652bc000a27223f3";
   };
 
-  propagatedBuildInputs = [ twisted ];
+  dependencies = [ twisted ];
 
   nativeCheckInputs = [ twisted ];
 
