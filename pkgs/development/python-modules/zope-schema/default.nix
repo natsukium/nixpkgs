@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   zope-location,
   zope-event,
@@ -12,12 +13,16 @@ buildPythonPackage rec {
   pname = "zope.schema";
   version = "7.0.1";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-6tTbywM1TU5BDJo7kERR60TZAlR1Gxy97fSmGu3p+7k=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     zope-location
     zope-event
     zope-interface
