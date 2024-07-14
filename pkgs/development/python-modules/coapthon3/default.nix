@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   cachetools,
   fetchFromGitHub,
   isPy27,
@@ -11,6 +12,10 @@ buildPythonPackage rec {
   version = "1.0.2";
   disabled = isPy27;
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "Tanganelli";
     repo = "CoAPthon3";
@@ -18,7 +23,7 @@ buildPythonPackage rec {
     hash = "sha256-9QApoPUu3XFZY/lgjAsf5r2StFiRtUd1UXWDrzYUh6w=";
   };
 
-  propagatedBuildInputs = [ cachetools ];
+  dependencies = [ cachetools ];
 
   # tests take in the order of 10 minutes to execute and sometimes hang forever on tear-down
   doCheck = false;
