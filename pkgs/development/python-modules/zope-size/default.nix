@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   zope-i18nmessageid,
   zope-interface,
@@ -10,12 +11,16 @@ buildPythonPackage rec {
   pname = "zope.size";
   version = "5.0";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-sVRT40+Bb/VFmtg82TUCmqWBxqRTRj4DxeLZe9IKQyo=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     zope-i18nmessageid
     zope-interface
   ];
