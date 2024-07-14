@@ -4,6 +4,7 @@
   substituteAll,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   SDL2,
   SDL2_ttf,
   SDL2_image,
@@ -22,6 +23,10 @@ buildPythonPackage rec {
   doCheck = false;
   pythonImportsCheck = [ "sdl2" ];
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "PySDL2";
     inherit version;
@@ -36,10 +41,14 @@ buildPythonPackage rec {
     SDL2_gfx
     SDL2_mixer
   ];
-  propagatedBuildInputs = [ SDL2 ];
+  dependencies = [ SDL2 ];
   patches = [
     (substituteAll (
       {
+        pyproject = true;
+
+        build-system = [ setuptools ];
+
         src = ./PySDL2-dll.patch;
       }
       //
