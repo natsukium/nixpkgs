@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   click,
   urllib3,
@@ -10,6 +11,10 @@
 buildPythonPackage rec {
   pname = "waybackpy";
   version = "3.0.6";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
