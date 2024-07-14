@@ -37,11 +37,15 @@ let
   dijitso = pythonPackages.buildPythonPackage {
     pname = "dijitso";
     inherit version;
+    pyproject = true;
+
+    build-system = [ setuptools ];
+
     src = fetchurl {
       url = "https://bitbucket.org/fenics-project/dijitso/downloads/dijitso-${version}.tar.gz";
       sha256 = "1ncgbr0bn5cvv16f13g722a0ipw6p9y6p4iasxjziwsp8kn5x97a";
     };
-    propagatedBuildInputs = [
+    dependencies = [
       numpy
       six
     ];
@@ -65,11 +69,15 @@ let
   fiat = pythonPackages.buildPythonPackage {
     pname = "fiat";
     inherit version;
+    pyproject = true;
+
+    build-system = [ setuptools ];
+
     src = fetchurl {
       url = "https://bitbucket.org/fenics-project/fiat/downloads/fiat-${version}.tar.gz";
       sha256 = "1sbi0fbr7w9g9ajr565g3njxrc3qydqjy3334vmz5xg0rd3106il";
     };
-    propagatedBuildInputs = [
+    dependencies = [
       numpy
       six
       sympy
@@ -105,11 +113,15 @@ let
   ufl = pythonPackages.buildPythonPackage {
     pname = "ufl";
     inherit version;
+    pyproject = true;
+
+    build-system = [ setuptools ];
+
     src = fetchurl {
       url = "https://bitbucket.org/fenics-project/ufl/downloads/ufl-${version}.tar.gz";
       sha256 = "04daxwg4y9c51sdgvwgmlc82nn0fjw7i2vzs15ckdc7dlazmcfi1";
     };
-    propagatedBuildInputs = [
+    dependencies = [
       numpy
       six
     ];
@@ -130,12 +142,16 @@ let
   ffc = pythonPackages.buildPythonPackage {
     pname = "ffc";
     inherit version;
+    pyproject = true;
+
+    build-system = [ setuptools ];
+
     src = fetchurl {
       url = "https://bitbucket.org/fenics-project/ffc/downloads/ffc-${version}.tar.gz";
       sha256 = "1zdg6pziss4va74pd7jjl8sc3ya2gmhpypccmyd8p7c66ji23y2g";
     };
     nativeBuildInputs = [ pybind11 ];
-    propagatedBuildInputs = [
+    dependencies = [
       dijitso
       fiat
       numpy
@@ -164,6 +180,10 @@ let
   dolfin = stdenv.mkDerivation {
     pname = "dolfin";
     inherit version;
+    pyproject = true;
+
+    build-system = [ setuptools ];
+
     src = fetchurl {
       url = "https://bitbucket.org/fenics-project/dolfin/downloads/dolfin-${version}.tar.gz";
       sha256 = "0kbyi4x5f6j4zpasch0swh0ch81w2h92rqm1nfp3ydi4a93vky33";
@@ -185,7 +205,7 @@ let
       sed -i '26 a #include <algorithm>' dolfin/mesh/MeshFunction.h
       sed -i '25 a #include <cstdint>' dolfin/mesh/MeshConnectivity.h
     '';
-    propagatedBuildInputs = [
+    dependencies = [
       dijitso
       fiat
       numpy
@@ -250,6 +270,10 @@ let
     pname = "dolfin";
     inherit version;
     disabled = pythonPackages.isPy27;
+    pyproject = true;
+
+    build-system = [ setuptools ];
+
     src = dolfin.src;
     sourceRoot = "${pname}-${version}/python";
     nativeBuildInputs = [
@@ -269,7 +293,7 @@ let
       boost
     ];
 
-    propagatedBuildInputs = [
+    dependencies = [
       dijitso
       ffc
       mpi4py
