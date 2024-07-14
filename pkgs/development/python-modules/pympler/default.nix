@@ -3,6 +3,7 @@
   stdenv,
   bottle,
   buildPythonPackage,
+  setuptools,
   fetchpatch,
   fetchPypi,
   pytestCheckHook,
@@ -12,6 +13,10 @@
 buildPythonPackage rec {
   pname = "pympler";
   version = "1.0.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "Pympler";
@@ -35,7 +40,7 @@ buildPythonPackage rec {
   # There is a version of bottle bundled with Pympler, but it is broken on
   # Python 3.11. Fortunately, Pympler will preferentially import an external
   # bottle if it is available, so we make it an explicit dependency.
-  propagatedBuildInputs = [ bottle ];
+  dependencies = [ bottle ];
 
   disabledTests =
     [
