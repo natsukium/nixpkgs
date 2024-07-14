@@ -2,6 +2,7 @@
   lib,
   fetchFromGitHub,
   buildPythonPackage,
+  setuptools,
   requests,
   six,
   tqdm,
@@ -11,6 +12,10 @@ buildPythonPackage {
   pname = "mediafire-dl";
   version = "unstable-2023-09-07";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "Juvenal-Yescas";
     repo = "mediafire-dl";
@@ -18,7 +23,7 @@ buildPythonPackage {
     hash = "sha256-9qACTNMkO/CH/qB6WiggIKwSiFIccgU7CH0UeGUaFb4=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     requests
     six
     tqdm
