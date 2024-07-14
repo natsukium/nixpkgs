@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   lib,
 }:
@@ -7,6 +8,10 @@
 buildPythonPackage rec {
   pname = "parsley";
   version = "1.3";
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "Parsley";
     inherit version;
