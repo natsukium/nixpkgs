@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   mock,
   zope-testing,
@@ -10,6 +11,10 @@ buildPythonPackage rec {
   pname = "zc-lockfile";
   version = "3.0.post1";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "zc.lockfile";
     inherit version;
@@ -17,7 +22,7 @@ buildPythonPackage rec {
   };
 
   buildInputs = [ mock ];
-  propagatedBuildInputs = [ zope-testing ];
+  dependencies = [ zope-testing ];
 
   meta = with lib; {
     description = "Inter-process locks";
