@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   lib,
   fetchPypi,
   numpy,
@@ -12,9 +13,13 @@ in
 buildPythonPackage {
   inherit pname version;
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi { inherit pname version hash; };
 
-  propagatedBuildInputs = [ numpy ];
+  dependencies = [ numpy ];
   dontUseSetuptoolsCheck = true;
 
   meta = with lib; {
