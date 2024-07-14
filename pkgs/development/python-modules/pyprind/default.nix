@@ -2,6 +2,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   psutil,
   pytest,
 }:
@@ -9,6 +10,10 @@
 buildPythonPackage rec {
   pname = "pyprind";
   version = "2.11.3";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "PyPrind";
