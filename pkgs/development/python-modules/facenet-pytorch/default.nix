@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pillow,
   torchvision,
@@ -10,6 +11,10 @@ buildPythonPackage rec {
   pname = "facenet-pytorch";
   version = "2.5.3";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-mMxbQqSPg3wCPrkvKlcc1KxqRmh8XnG56ZtJEIcnPis=";
@@ -19,7 +24,7 @@ buildPythonPackage rec {
 
   pythonImportsCheck = [ "facenet_pytorch" ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     pillow
     torchvision
   ];
