@@ -2,12 +2,17 @@
   lib,
   stdenv,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
 }:
 
 buildPythonPackage rec {
   pname = "pyplatec";
   version = "1.4.0";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "PyPlatec";
