@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   pytest,
   pythonOlder,
@@ -19,6 +20,10 @@ else
     # Unfortunately the maintainer seems inactive and has not responded to
     # a request for a new release since 2016:
     # https://github.com/chrippa/backports.shutil_get_terminal_size/issues/7
+    pyproject = true;
+
+    build-system = [ setuptools ];
+
     src = fetchFromGitHub {
       owner = "chrippa";
       repo = "backports.shutil_get_terminal_size";
