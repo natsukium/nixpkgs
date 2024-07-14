@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   pillow,
   xlib,
@@ -10,6 +11,10 @@
 buildPythonPackage rec {
   pname = "pyscreeze";
   version = "0.1.26";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "asweigart";
@@ -29,7 +34,7 @@ buildPythonPackage rec {
     xvfb-run python -m unittest tests.test_pyscreeze
   '';
 
-  propagatedBuildInputs = [ pillow ];
+  dependencies = [ pillow ];
 
   meta = with lib; {
     description = "PyScreeze is a simple, cross-platform screenshot module for Python 2 and 3";
