@@ -2,6 +2,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   crayons,
   flask,
   flask-caching,
@@ -15,13 +16,17 @@ buildPythonPackage rec {
   pname = "flask-common";
   version = "0.3.0";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "Flask-Common";
     inherit version;
     sha256 = "13d99f2dbc0a332b8bc4b2cc394d3e48f89672c266868e372cd9d7b433d921a9";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     crayons
     flask
     flask-caching
