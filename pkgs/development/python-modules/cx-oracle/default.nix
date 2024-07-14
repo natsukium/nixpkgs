@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   odpic,
 }:
@@ -10,6 +11,10 @@ buildPythonPackage rec {
   version = "8.3.0";
 
   buildInputs = [ odpic ];
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "cx_Oracle";
