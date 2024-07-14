@@ -11,6 +11,10 @@ buildPythonPackage rec {
   pname = "zc-buildout";
   version = "3.0.1";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "buildout";
     repo = "buildout";
@@ -18,7 +22,7 @@ buildPythonPackage rec {
     sha256 = "J/ymUCFhl7EviHMEYSUCTky0ULRT8aL4gNCGxrbqJi0=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     setuptools
     pip
     wheel
