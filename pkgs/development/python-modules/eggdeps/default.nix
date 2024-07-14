@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   zope-interface,
   zope-testing,
@@ -10,13 +11,17 @@ buildPythonPackage rec {
   pname = "tl-eggdeps";
   version = "1.0";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit version;
     pname = "tl.eggdeps";
     sha256 = "a094ed7961a3dd38fcaaa69cf7a58670038acdff186360166d9e3d964b7a7323";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     zope-interface
     zope-testing
   ];
