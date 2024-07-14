@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   lib,
   libjpeg_turbo,
@@ -22,6 +23,10 @@ let
 in
 buildPythonPackage {
   inherit pname version;
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "pytorch";
