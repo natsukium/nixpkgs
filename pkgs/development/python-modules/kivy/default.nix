@@ -2,6 +2,7 @@
   lib,
   stdenv,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   pkg-config,
   cython_0,
@@ -28,6 +29,10 @@
 buildPythonPackage rec {
   pname = "kivy";
   version = "2.3.0";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "kivy";
@@ -70,7 +75,7 @@ buildPythonPackage rec {
       ]
     );
 
-  propagatedBuildInputs = [
+  dependencies = [
     kivy-garden
     packaging
     pillow
