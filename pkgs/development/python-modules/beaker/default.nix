@@ -2,6 +2,7 @@
   stdenv,
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   glibcLocales,
   nose,
@@ -25,6 +26,10 @@ buildPythonPackage rec {
   version = "1.13.0";
 
   # The pypy release do not contains the tests
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "bbangert";
     repo = "beaker";
@@ -32,7 +37,7 @@ buildPythonPackage rec {
     sha256 = "sha256-HzjhOPXElwKoJLrhGIbVn798tbX/kaS1EpQIX+vXCtE=";
   };
 
-  propagatedBuildInputs =
+  dependencies =
     [
       sqlalchemy
       pycrypto
