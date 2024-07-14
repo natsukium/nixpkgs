@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pygments,
   isPy3k,
@@ -11,12 +12,16 @@ buildPythonPackage rec {
   version = "0.1.5";
   disabled = !isPy3k;
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-SLAe5ubIGEchUNoHCct6CWisBja3WNEfpE48v9CTzPQ=";
   };
 
-  propagatedBuildInputs = [ pygments ];
+  dependencies = [ pygments ];
 
   # has no tests
   doCheck = false;
