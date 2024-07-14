@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   six,
 }:
@@ -9,13 +10,17 @@ buildPythonPackage rec {
   pname = "twiggy";
   version = "0.5.1";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "Twiggy";
     inherit version;
     sha256 = "7938840275972f6ce89994a5bdfb0b84f0386301a043a960af6364952e78ffe4";
   };
 
-  propagatedBuildInputs = [ six ];
+  dependencies = [ six ];
   doCheck = false;
 
   meta = with lib; {
