@@ -11,6 +11,10 @@ buildPythonPackage rec {
   version = "1.1.0";
 
   # Used github as the src since the pypi package does not include the tests
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "0101";
     repo = pname;
@@ -20,7 +24,7 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [ pytestCheckHook ];
 
-  propagatedBuildInputs = [ setuptools ];
+  dependencies = [ setuptools ];
 
   pythonImportsCheck = [ "pipetools" ];
 
