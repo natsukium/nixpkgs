@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   requests,
   requests-cache,
@@ -10,6 +11,10 @@
 buildPythonPackage rec {
   pname = "pysychonaut";
   version = "0.6.0";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "PySychonaut";
@@ -21,7 +26,7 @@ buildPythonPackage rec {
     substituteInPlace setup.py --replace "bs4" "beautifulsoup4"
   '';
 
-  propagatedBuildInputs = [
+  dependencies = [
     requests
     requests-cache
     beautifulsoup4
