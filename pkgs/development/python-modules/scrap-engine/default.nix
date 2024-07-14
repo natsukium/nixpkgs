@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   setuptools-scm,
 }:
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   pname = "scrap_engine";
   version = "1.4.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
