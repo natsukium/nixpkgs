@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   defcon,
   fonttools,
@@ -16,6 +17,10 @@ buildPythonPackage rec {
   pname = "ufoprocessor";
   version = "1.9.0";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "ufoProcessor";
     inherit version;
@@ -25,7 +30,7 @@ buildPythonPackage rec {
 
   nativeBuildInputs = [ setuptools-scm ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     defcon
     lxml
     fonttools
