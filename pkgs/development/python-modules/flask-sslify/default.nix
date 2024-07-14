@@ -2,6 +2,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   flask,
 }:
 
@@ -9,13 +10,17 @@ buildPythonPackage rec {
   pname = "flask-sslify";
   version = "0.1.5";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "Flask-SSLify";
     inherit version;
     sha256 = "0gjl1m828z5dm3c5dpc2qjgi4llf84cp72mafr0ib5fd14y1sgnk";
   };
 
-  propagatedBuildInputs = [ flask ];
+  dependencies = [ flask ];
 
   doCheck = false;
   pythonImportsCheck = [ "flask_sslify" ];
