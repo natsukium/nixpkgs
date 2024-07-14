@@ -11,12 +11,16 @@ buildPythonPackage rec {
   pname = "plone.testing";
   version = "9.0.1";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-xdzm4LG/W5ziYXaXbCOfQbZYZvaUUih3lWhkLzWqeUc=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     six
     setuptools
     zope-testing
