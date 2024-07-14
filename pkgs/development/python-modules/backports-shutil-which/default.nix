@@ -2,12 +2,17 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   pytest,
 }:
 
 buildPythonPackage rec {
   pname = "backports-shutil-which";
   version = "3.5.2";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "backports.shutil_which";
