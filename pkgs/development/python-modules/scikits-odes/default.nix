@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pythonAtLeast,
   cython,
@@ -22,6 +23,10 @@ buildPythonPackage rec {
   # https://github.com/bmcage/odes/issues/130
   disabled = isPy27 || pythonAtLeast "3.12";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-px4Z4UhYk3VK6MBQZoIy/MaU8XuDYC51++v3v5+XXh4=";
@@ -32,7 +37,7 @@ buildPythonPackage rec {
     cython
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     numpy
     sundials
     scipy
