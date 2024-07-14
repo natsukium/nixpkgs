@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pygithub,
   python-gitlab,
@@ -10,12 +11,16 @@ buildPythonPackage rec {
   pname = "criticality_score";
   version = "1.0.8";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-5XkVT0blnLG158a01jDfQl1Rx9U1LMsqaMjTdN7Q4QQ=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     pygithub
     python-gitlab
   ];
