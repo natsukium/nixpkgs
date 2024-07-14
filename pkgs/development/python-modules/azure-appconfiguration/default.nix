@@ -11,7 +11,7 @@
 buildPythonPackage rec {
   pname = "azure-appconfiguration";
   version = "1.6.0";
-  pyporject = true;
+  pyproject = true;
 
   disabled = pythonOlder "3.7";
 
