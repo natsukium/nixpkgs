@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   twisted,
   qtpy,
@@ -11,6 +12,10 @@ buildPythonPackage rec {
   pname = "qreactor-unstable";
   version = "2018-09-29";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "frmdstryr";
     repo = "qt-reactor";
@@ -18,7 +23,7 @@ buildPythonPackage rec {
     sha256 = "1nb5iwg0nfz86shw28a2kj5pyhd4jvvxhf73fhnfbl8scgnvjv9h";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     twisted
     qtpy
   ];
