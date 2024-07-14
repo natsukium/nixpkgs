@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   lib,
   cython,
   libseccomp,
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   pname = "libseccomp";
   version = libseccomp.version;
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = libseccomp.pythonsrc;
 
   VERSION_RELEASE = version; # used by build system
