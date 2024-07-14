@@ -10,6 +10,8 @@ buildPythonPackage rec {
   pname = "pycycling";
   version = "0.4.0";
 
+  pyproject = true;
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-yi3ZcyhhOtHp46MK0R15/dic+b1oYjy4tFVRH3ssbE8=";
@@ -17,9 +19,7 @@ buildPythonPackage rec {
 
   build-system = [ setuptools ];
 
-  propagatedBuildInputs = [
-    bleak
-  ];
+  dependencies = [ bleak ];
 
   pythonImportsCheck = [ pname ];
 
