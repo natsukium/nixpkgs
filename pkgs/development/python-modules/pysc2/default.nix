@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   lib,
   fetchFromGitHub,
   absl-py,
@@ -21,6 +22,10 @@ buildPythonPackage {
   pname = "pysc2";
   version = "1.2";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "deepmind";
     repo = "pysc2";
@@ -38,7 +43,7 @@ buildPythonPackage {
       --subst-var-by 'sc2path' '${sc2-headless}'
   '';
 
-  propagatedBuildInputs = [
+  dependencies = [
     absl-py
     enum34
     future
