@@ -2,6 +2,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   tkinter,
 }:
 
@@ -9,13 +10,17 @@ buildPythonPackage rec {
   pname = "pymsgbox";
   version = "1.0.9";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "PyMsgBox";
     inherit version;
     hash = "sha256-IZQifei/96PW2lQYSHBaFV3LsqBu4SDZ8oCh1/USY/8=";
   };
 
-  propagatedBuildInputs = [ tkinter ];
+  dependencies = [ tkinter ];
 
   # Finding tests fails
   doCheck = false;
