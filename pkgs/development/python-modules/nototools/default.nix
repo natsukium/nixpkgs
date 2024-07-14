@@ -2,6 +2,7 @@
   fetchFromGitHub,
   lib,
   buildPythonPackage,
+  setuptools,
   pythonOlder,
   afdko,
   appdirs,
@@ -40,6 +41,10 @@ buildPythonPackage rec {
 
   disabled = pythonOlder "3.6";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "googlefonts";
     repo = "nototools";
@@ -53,7 +58,7 @@ buildPythonPackage rec {
 
   nativeBuildInputs = [ setuptools-scm ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     afdko
     appdirs
     attrs
