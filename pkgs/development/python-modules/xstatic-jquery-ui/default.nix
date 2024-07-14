@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   lib,
   fetchPypi,
   xstatic-jquery,
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   pname = "xstatic-jquery-ui";
   version = "1.13.0.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "XStatic-jquery-ui";
@@ -18,7 +23,7 @@ buildPythonPackage rec {
   # no tests implemented
   doCheck = false;
 
-  propagatedBuildInputs = [ xstatic-jquery ];
+  dependencies = [ xstatic-jquery ];
 
   meta = with lib; {
     homepage = "https://jqueryui.com/";
