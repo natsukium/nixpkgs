@@ -2,12 +2,17 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   setuptools-scm,
 }:
 
 buildPythonPackage rec {
   pname = "dotty_dict";
   version = "1.3.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
