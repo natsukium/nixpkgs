@@ -3,6 +3,7 @@
   fetchFromGitHub,
   fetchpatch,
   buildPythonPackage,
+  setuptools,
   isPy3k,
   flask,
   mock,
@@ -13,6 +14,10 @@ buildPythonPackage rec {
   pname = "flask-seasurf";
   version = "1.1.1";
   disabled = !isPy3k;
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "maxcountryman";
@@ -35,7 +40,7 @@ buildPythonPackage rec {
     sed -i "s#\(\(test_header_set_on_post\|test_https_good_referer\|test_https_referer_check_disabled\)(self):\)#\1\n        return#g" test_seasurf.py
   '';
 
-  propagatedBuildInputs = [ flask ];
+  dependencies = [ flask ];
 
   nativeCheckInputs = [
     unittestCheckHook
