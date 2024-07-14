@@ -3,10 +3,15 @@
   openbabel,
   python,
   buildPythonPackage,
+  setuptools,
 }:
 
 buildPythonPackage rec {
   inherit (openbabel) pname version;
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = "${openbabel}/lib/python${python.sourceVersion.major}.${python.sourceVersion.minor}/site-packages";
 
