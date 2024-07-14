@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   isPyPy,
   pkgs,
@@ -10,6 +11,10 @@ buildPythonPackage rec {
   pname = "pyaudio";
   version = "0.2.14";
   disabled = isPyPy;
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "PyAudio";
