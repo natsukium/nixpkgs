@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   debtcollector,
   oslotest,
@@ -11,6 +12,10 @@
 buildPythonPackage rec {
   pname = "oslo.context";
   version = "5.5.0";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
@@ -23,7 +28,7 @@ buildPythonPackage rec {
     rm test-requirements.txt
   '';
 
-  propagatedBuildInputs = [
+  dependencies = [
     debtcollector
     pbr
   ];
