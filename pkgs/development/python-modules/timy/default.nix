@@ -1,12 +1,18 @@
-{ lib
-, buildPythonPackage
-, fetchFromGitHub
-, pytestCheckHook
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  setuptools,
+  pytestCheckHook,
 }:
 
 buildPythonPackage rec {
   pname = "timy";
   version = "0.4.2";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "ramonsaraiva";
@@ -15,9 +21,7 @@ buildPythonPackage rec {
     hash = "sha256-4Opaph8Q1tQH+C/Epur8AA26RN4vO944DjCg0zDJqxM=";
   };
 
-  nativeCheckInputs = [
-    pytestCheckHook
-  ];
+  nativeCheckInputs = [ pytestCheckHook ];
 
   meta = with lib; {
     description = "Minimalist measurement of python code time";
