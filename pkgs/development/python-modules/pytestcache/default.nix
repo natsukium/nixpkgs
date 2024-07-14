@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pytest,
   execnet,
@@ -10,13 +11,17 @@ buildPythonPackage rec {
   pname = "pytest-cache";
   version = "1.0";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     sha256 = "1a873fihw4rhshc722j4h6j7g3nj7xpgsna9hhg3zn6ksknnhx5y";
   };
 
   buildInputs = [ pytest ];
-  propagatedBuildInputs = [ execnet ];
+  dependencies = [ execnet ];
 
   checkPhase = ''
     py.test
