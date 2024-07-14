@@ -2,6 +2,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   isPy3k,
   future,
 }:
@@ -9,6 +10,10 @@
 buildPythonPackage rec {
   pname = "ecpy";
   version = "1.2.5";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "ECPy";
@@ -20,7 +25,7 @@ buildPythonPackage rec {
     sed -i "s|reqs.append('future')|pass|" setup.py
   '';
 
-  propagatedBuildInputs = lib.optional (!isPy3k) future;
+  dependencies = lib.optional (!isPy3k) future;
 
   # No tests implemented
   doCheck = false;
