@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   isPy3k,
 }:
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   pname = "heapdict";
   version = "1.0.1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "HeapDict";
