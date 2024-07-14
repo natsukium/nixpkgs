@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   docutils,
   fetchFromGitHub,
   isPy27,
@@ -11,6 +12,10 @@ buildPythonPackage rec {
   version = "1.0.10";
   pname = "python_toolbox";
   disabled = isPy27;
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "cool-RR";
