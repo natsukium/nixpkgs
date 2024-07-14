@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   lib,
   fetchFromGitHub,
   unittestCheckHook,
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   pname = "rtfunicode";
   version = "1.4";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "mjpieters";
