@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   nose,
 }:
@@ -10,6 +11,10 @@ buildPythonPackage rec {
   version = "0.9";
 
   # no tests in PyPI tarball
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "python-ivi";
     repo = pname;
