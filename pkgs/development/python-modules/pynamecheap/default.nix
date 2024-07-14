@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   requests,
 }:
@@ -9,10 +10,14 @@ buildPythonPackage rec {
   pname = "pynamecheap";
   version = "0.0.3";
 
-  propagatedBuildInputs = [ requests ];
+  dependencies = [ requests ];
 
   # Tests require access to api.sandbox.namecheap.com
   doCheck = false;
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "Bemmu";
