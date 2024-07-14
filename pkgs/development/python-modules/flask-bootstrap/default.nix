@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   flask,
   visitor,
@@ -11,13 +12,17 @@ buildPythonPackage rec {
   pname = "flask-bootstrap";
   version = "3.3.7.1";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "Flask-Bootstrap";
     inherit version;
     sha256 = "1j1s2bplaifsnmr8vfxa3czca4rz78xyhrg4chx39xl306afs26b";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     flask
     visitor
     dominate
