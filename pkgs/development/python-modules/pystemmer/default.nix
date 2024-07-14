@@ -12,7 +12,7 @@
 buildPythonPackage rec {
   pname = "pystemmer";
   version = "2.2.0.1";
-  pyproejct = true;
+  pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowballstem";
