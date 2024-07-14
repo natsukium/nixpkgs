@@ -18,12 +18,16 @@ buildPythonPackage rec {
   pname = "mkdocs-macros-plugin";
   version = "1.0.5";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-/jSNdfAckR82K22ZjFez2FtQWHbd5p25JPLFEsOVwyg=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     jinja2
     termcolor
     python-dateutil
