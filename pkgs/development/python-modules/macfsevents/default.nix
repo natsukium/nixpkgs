@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   CoreFoundation,
   CoreServices,
@@ -9,6 +10,10 @@
 buildPythonPackage rec {
   pname = "macfsevents";
   version = "0.8.4";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "MacFSEvents";
