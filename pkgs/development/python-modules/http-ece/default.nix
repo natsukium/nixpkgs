@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   cryptography,
   fetchPypi,
   mock,
@@ -11,6 +12,10 @@
 buildPythonPackage rec {
   pname = "http-ece";
   version = "1.2.0";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "http_ece";
@@ -24,7 +29,7 @@ buildPythonPackage rec {
       --replace-fail '"coverage",' ""
   '';
 
-  propagatedBuildInputs = [ cryptography ];
+  dependencies = [ cryptography ];
 
   doCheck = pythonOlder "3.12";
 
