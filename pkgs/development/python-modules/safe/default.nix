@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   nose,
 }:
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   version = "0.4";
   pname = "Safe";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
