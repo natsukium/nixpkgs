@@ -2,6 +2,7 @@
   stdenv,
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pytestCheckHook,
   pyusb,
@@ -11,12 +12,16 @@ buildPythonPackage rec {
   pname = "python-yubico";
   version = "1.3.3";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-2EZkJ6pZIqxdS36cZbaTEIQnz1N9ZT1oyyEsBxPo5vU=";
   };
 
-  propagatedBuildInputs = [ pyusb ];
+  dependencies = [ pyusb ];
 
   checkInputs = [ pytestCheckHook ];
   pythonImportsCheck = [ "yubico" ];
