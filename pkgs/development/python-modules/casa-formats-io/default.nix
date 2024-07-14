@@ -2,6 +2,7 @@
   lib,
   astropy,
   buildPythonPackage,
+  setuptools,
   dask,
   fetchPypi,
   numpy,
@@ -13,7 +14,7 @@
 buildPythonPackage rec {
   pname = "casa-formats-io";
   version = "0.3.0";
-  prproject = true;
+  pyproject = true;
 
   disabled = pythonOlder "3.9";
 
@@ -23,7 +24,10 @@ buildPythonPackage rec {
     hash = "sha256-FpQj0XeZ7vvOzUM/+5qG6FRwNXl3gzoUBItYdQ1M4m4=";
   };
 
-  build-system = [ setuptools-scm ];
+  build-system = [
+    setuptools
+    setuptools-scm
+  ];
 
   nativeBuildInputs = [ oldest-supported-numpy ];
 
