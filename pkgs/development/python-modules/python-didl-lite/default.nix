@@ -11,7 +11,7 @@
 buildPythonPackage rec {
   pname = "python-didl-lite";
   version = "1.4.0";
-  pyroject = true;
+  pyproject = true;
 
   disabled = pythonOlder "3.8";
 
@@ -22,9 +22,9 @@ buildPythonPackage rec {
     hash = "sha256-A+G97T/udyL/yRqykq1sEGDEI6ZwtDBc5xUNFiJp0UQ=";
   };
 
-  nativeBuildInputs = [ setuptools ];
+  build-system = [ setuptools ];
 
-  propagatedBuildInputs = [ defusedxml ];
+  dependencies = [ defusedxml ];
 
   nativeCheckInputs = [ pytestCheckHook ];
 
