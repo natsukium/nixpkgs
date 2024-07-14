@@ -3,6 +3,7 @@
   pkgs,
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   certifi,
   scapy,
@@ -16,11 +17,15 @@
   pyyaml,
   pytest-asyncio,
   async-timeout,
-  }:
+}:
 
 buildPythonPackage rec {
   pname = "plugp100";
   version = "5.1.3";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "petretiandrea";
@@ -29,10 +34,22 @@ buildPythonPackage rec {
     sha256 = "sha256-V+9cVBMN8H4oFU51T9BDrLF46xgQHqIsMj8nuPedUGA=";
   };
 
-  propagatedBuildInputs =
-    [ certifi jsons requests aiohttp semantic-version scapy urllib3 pyyaml ];
+  dependencies = [
+    certifi
+    jsons
+    requests
+    aiohttp
+    semantic-version
+    scapy
+    urllib3
+    pyyaml
+  ];
 
-  nativeCheckInputs = [ pytestCheckHook pytest-asyncio async-timeout ];
+  nativeCheckInputs = [
+    pytestCheckHook
+    pytest-asyncio
+    async-timeout
+  ];
 
   disabledTestPaths = [
     "tests/integration/"
