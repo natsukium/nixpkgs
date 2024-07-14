@@ -3,6 +3,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   libvorbis,
   flac,
   libogg,
@@ -16,6 +17,10 @@ buildPythonPackage rec {
 
   pname = "pyogg";
   version = "0.6.14a1";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "PyOgg";
@@ -48,6 +53,10 @@ buildPythonPackage rec {
   ];
   patches = [
     (substituteAll {
+      pyproject = true;
+
+      build-system = [ setuptools ];
+
       src = ./pyogg-paths.patch;
       flacLibPath = "${flac.out}/lib/libFLAC${stdenv.hostPlatform.extensions.sharedLibrary}";
       oggLibPath = "${libogg}/lib/libogg${stdenv.hostPlatform.extensions.sharedLibrary}";
