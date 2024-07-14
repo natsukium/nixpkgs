@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   setuptools,
   requests,
@@ -13,6 +14,10 @@ let
 in
 buildPythonPackage {
   inherit pname version;
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
