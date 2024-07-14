@@ -1,12 +1,17 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
 }:
 
 buildPythonPackage rec {
   pname = "zope.event";
   version = "4.6";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
