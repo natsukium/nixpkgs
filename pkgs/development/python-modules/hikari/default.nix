@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   pytestCheckHook,
   pythonOlder,
@@ -19,6 +20,10 @@ buildPythonPackage rec {
   pname = "hikari";
   version = "2.0.0.dev125";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "hikari-py";
     repo = "hikari";
@@ -36,8 +41,7 @@ buildPythonPackage rec {
     '';
   };
 
-
-  propagatedBuildInputs = [
+  dependencies = [
     aiohttp
     attrs
     multidict
