@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   defcon,
   fontmath,
@@ -12,6 +13,10 @@ buildPythonPackage rec {
   pname = "mutatormath";
   version = "3.0.1";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "MutatorMath";
     inherit version;
@@ -19,7 +24,7 @@ buildPythonPackage rec {
     extension = "zip";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     fontmath
     unicodedata2
     defcon
