@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   matrix-client,
 }:
@@ -9,12 +10,16 @@ buildPythonPackage rec {
   pname = "matrix_api_async";
   version = "0.1.0";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     sha256 = "0xdx8fci0lar3x09dwqgka6ssz9d3g7gsfx4yyr13sdwza7zsqc3";
   };
 
-  propagatedBuildInputs = [ matrix-client ];
+  dependencies = [ matrix-client ];
 
   # no tests
   doCheck = false;
