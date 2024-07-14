@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pythonOlder,
   python-json-logger,
@@ -14,12 +15,16 @@ buildPythonPackage rec {
   version = "0.1.0";
   disabled = pythonOlder "3.5";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     sha256 = "052khyn6h97jxl3k5i2m81xvga5v6vwh5qixzrax4w6zwcx62p24";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     python-json-logger
     jsonschema
     ruamel-yaml
