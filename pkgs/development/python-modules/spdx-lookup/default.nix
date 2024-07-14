@@ -2,6 +2,7 @@
   lib,
   fetchFromGitHub,
   buildPythonPackage,
+  setuptools,
   nix-update-script,
   spdx,
 }:
@@ -10,6 +11,10 @@ buildPythonPackage rec {
   pname = "spdx-lookup";
   version = "0.3.2";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "bbqsrc";
     repo = "spdx-lookup-python";
@@ -17,7 +22,7 @@ buildPythonPackage rec {
     hash = "sha256-jtzhqRAj1BWdU8AuR7Gr343mL5alLXhi+SyCkCI5AAU=";
   };
 
-  propagatedBuildInputs = [ spdx ];
+  dependencies = [ spdx ];
 
   pythonImportsCheck = [ "spdx_lookup" ];
 
