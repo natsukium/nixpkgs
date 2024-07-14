@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   routes,
   markupsafe,
@@ -11,6 +12,10 @@
 buildPythonPackage rec {
   pname = "webhelpers";
   version = "1.3";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "WebHelpers";
