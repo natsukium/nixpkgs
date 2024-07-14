@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pytestCheckHook,
   cheroot,
@@ -15,12 +16,16 @@ buildPythonPackage rec {
   version = "0.62";
   pname = "web.py";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     sha256 = "5ce684caa240654cae5950da8b4b7bc178812031e08f990518d072bd44ab525e";
   };
 
-  propagatedBuildInputs = [ cheroot ];
+  dependencies = [ cheroot ];
 
   # requires multiple running databases
   doCheck = false;
