@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   openssl,
 }:
@@ -8,6 +9,10 @@
 buildPythonPackage rec {
   pname = "py-scrypt";
   version = "0.8.24";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "scrypt";
