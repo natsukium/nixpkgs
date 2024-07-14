@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pythonOlder,
 
@@ -12,6 +13,10 @@ buildPythonPackage rec {
   pname = "keyrings.passwordstore";
   version = "0.1.0";
   disabled = pythonOlder "3.6";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
