@@ -21,12 +21,16 @@ buildPythonPackage rec {
 
   disabled = isPy27; # namespace is broken for python2
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-Q/EqHTlIRjsUYgOMR7Qp3LXkLgun8uFlEbArpdKt/9s=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     distro
     httplib2
     oauthlib
