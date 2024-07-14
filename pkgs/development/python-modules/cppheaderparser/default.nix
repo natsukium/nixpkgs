@@ -1,5 +1,6 @@
 {
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   ply,
   lib,
@@ -9,13 +10,17 @@ buildPythonPackage rec {
   pname = "cppheaderparser";
   version = "2.7.4";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "CppHeaderParser";
     inherit version;
     hash = "sha256-OCswQW2VsKXoUCshSBDcrCpWQykX4mUUR9Or4lPjzEI=";
   };
 
-  propagatedBuildInputs = [ ply ];
+  dependencies = [ ply ];
 
   pythonImportsCheck = [ "CppHeaderParser" ];
 
