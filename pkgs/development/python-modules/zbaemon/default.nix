@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   zconfig,
 }:
@@ -9,12 +10,16 @@ buildPythonPackage rec {
   pname = "zdaemon";
   version = "4.4";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-SCHjvbRzh88eklWwREusQ3z3KqC1nRQHuTLjH9QyPvw=";
   };
 
-  propagatedBuildInputs = [ zconfig ];
+  dependencies = [ zconfig ];
 
   # too many deps..
   doCheck = false;
