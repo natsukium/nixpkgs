@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   requests,
   six,
@@ -10,6 +11,10 @@
 buildPythonPackage rec {
   pname = "python-consul";
   version = "1.1.0";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     inherit pname version;
