@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   callPackage,
   fetchFromGitHub,
   runCommandLocal,
@@ -12,6 +13,10 @@
 (buildPythonPackage rec {
   pname = "gfal2-util";
   version = "1.8.1";
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "cern-fts";
     repo = "gfal2-util";
@@ -28,7 +33,7 @@
     done
   '';
 
-  propagatedBuildInputs = [ gfal2-python ];
+  dependencies = [ gfal2-python ];
 
   pythonImportsCheck = [ "gfal2_util" ];
 
