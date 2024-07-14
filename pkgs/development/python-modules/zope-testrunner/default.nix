@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   zope-interface,
   zope-exceptions,
@@ -12,12 +13,16 @@ buildPythonPackage rec {
   pname = "zope.testrunner";
   version = "6.4";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     inherit pname version;
     hash = "sha256-C4Wfx01vK2xd2K353uTsdAX3PykOyrJXCsY2+DYSKMg=";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     zope-interface
     zope-exceptions
     zope-testing
