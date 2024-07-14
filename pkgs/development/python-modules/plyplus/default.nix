@@ -2,6 +2,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  setuptools,
   ply,
   isPy3k,
 }:
@@ -9,13 +10,17 @@ buildPythonPackage rec {
   pname = "plyplus";
   version = "0.7.5";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "PlyPlus";
     inherit version;
     sha256 = "0g3flgfm3jpb2d8v9z0qmbwca5gxdqr10cs3zvlfhv5cs06ahpnp";
   };
 
-  propagatedBuildInputs = [ ply ];
+  dependencies = [ ply ];
 
   doCheck = !isPy3k;
 
