@@ -2,6 +2,7 @@
   stdenv,
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   pyyaml,
   openssh,
@@ -14,6 +15,10 @@
 buildPythonPackage rec {
   pname = "clustershell";
   version = "1.9.2";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchPypi {
     pname = "ClusterShell";
@@ -47,7 +52,7 @@ buildPythonPackage rec {
       --replace "currentThread" "current_thread"
   '';
 
-  propagatedBuildInputs = [ pyyaml ];
+  dependencies = [ pyyaml ];
 
   nativeCheckInputs = [
     bc
