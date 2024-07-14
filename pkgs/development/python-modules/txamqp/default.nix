@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   twisted,
 }:
@@ -9,13 +10,17 @@ buildPythonPackage rec {
   pname = "txamqp";
   version = "0.8.2";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "txAMQP";
     inherit version;
     sha256 = "0jd9864k3csc06kipiwzjlk9mq4054s8kzk5q1cfnxj8572s4iv4";
   };
 
-  propagatedBuildInputs = [ twisted ];
+  dependencies = [ twisted ];
 
   meta = with lib; {
     homepage = "https://github.com/txamqp/txamqp";
