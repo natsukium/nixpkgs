@@ -2,6 +2,7 @@
   lib,
   fetchFromGitHub,
   buildPythonPackage,
+  setuptools,
   fire,
   fugashi,
   jaconv,
@@ -18,6 +19,10 @@ buildPythonPackage rec {
   pname = "manga-ocr";
   version = "0.1.11";
   disabled = pythonOlder "3.7";
+
+  pyproject = true;
+
+  build-system = [ setuptools ];
 
   src = fetchFromGitHub {
     owner = "kha-white";
@@ -41,7 +46,7 @@ buildPythonPackage rec {
     ./package_data.patch
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     # taken from requirements.txt
     fire
     fugashi
