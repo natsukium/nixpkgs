@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchFromGitHub,
   django,
 }:
@@ -11,6 +12,10 @@ buildPythonPackage {
   pname = "django-mdeditor";
   inherit version;
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchFromGitHub {
     owner = "pylixm";
     repo = "django-mdeditor";
@@ -18,7 +23,7 @@ buildPythonPackage {
     hash = "sha256-t57j1HhjNQtBwlbqe4mAHQ9WiNcIhMKYmrZkiqh+k5k=";
   };
 
-  propagatedBuildInputs = [ django ];
+  dependencies = [ django ];
 
   # no tests
   doCheck = false;
