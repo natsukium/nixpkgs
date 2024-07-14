@@ -18,13 +18,15 @@ buildPythonPackage rec {
   pname = "sudachipy";
   inherit (sudachi-rs) src version;
 
+  pyproject = true;
+
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
     name = "${pname}-${version}";
     hash = "sha256-ARwvThfATDdzBTjPFr9yjbE/0eYvp/TCZOEGbUupJmU=";
   };
 
-  nativeBuildInputs = [
+  build-system = [
     cargo
     rustPlatform.cargoSetupHook
     rustc
