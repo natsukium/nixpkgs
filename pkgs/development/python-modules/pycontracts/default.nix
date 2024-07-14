@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   nose,
   pyparsing,
@@ -13,6 +14,10 @@ buildPythonPackage rec {
   pname = "pycontracts";
   version = "1.8.14";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "PyContracts";
     inherit version;
@@ -20,7 +25,7 @@ buildPythonPackage rec {
   };
 
   buildInputs = [ nose ];
-  propagatedBuildInputs = [
+  dependencies = [
     pyparsing
     decorator
     six
