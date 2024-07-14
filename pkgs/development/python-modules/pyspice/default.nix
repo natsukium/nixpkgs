@@ -20,13 +20,17 @@ buildPythonPackage rec {
   version = "1.5";
   disabled = pythonOlder "3.6";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "PySpice";
     inherit version;
     sha256 = "d28448accad98959e0f5932af8736e90a1f3f9ff965121c6881d24cdfca23d22";
   };
 
-  propagatedBuildInputs = [
+  dependencies = [
     setuptools
     requests
     pyyaml
