@@ -1,6 +1,7 @@
 {
   lib,
   buildPythonPackage,
+  setuptools,
   fetchPypi,
   fonttools,
   fs,
@@ -15,6 +16,10 @@ buildPythonPackage rec {
   pname = "booleanoperations";
   version = "0.9.0";
 
+  pyproject = true;
+
+  build-system = [ setuptools ];
+
   src = fetchPypi {
     pname = "booleanOperations";
     inherit version;
@@ -24,7 +29,7 @@ buildPythonPackage rec {
 
   nativeBuildInputs = [ setuptools-scm ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     fonttools
     fs
     pyclipper
