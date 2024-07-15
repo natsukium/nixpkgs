@@ -21,7 +21,6 @@
 , pythonRemoveBinBytecodeHook
 , pythonRemoveTestsDirHook
 , pythonRuntimeDepsCheckHook
-, setuptoolsBuildHook
 , setuptoolsCheckHook
 , wheelUnpackHook
 , eggUnpackHook
@@ -260,7 +259,8 @@ let
     ] ++ optionals (hasSuffix "zip" (attrs.src.name or "")) [
       unzip
     ] ++ optionals (format' == "setuptools") [
-      setuptoolsBuildHook
+      pypaBuildHook
+      setuptools
     ] ++ optionals (format' == "pyproject") [(
       if isBootstrapPackage then
         pypaBuildHook.override {
@@ -344,6 +344,8 @@ let
     installCheckPhase = attrs.checkPhase;
   } //  optionalAttrs (disabledTestPaths != []) {
       disabledTestPaths = escapeShellArgs disabledTestPaths;
+  } //  optionalAttrs (format' == "setuptools") {
+    pypaBuildFlags = (attrs.pypaBuildFlags or []) ++ [ "--skip-dependency-check" ];
   }));
 
 in extendDerivation
