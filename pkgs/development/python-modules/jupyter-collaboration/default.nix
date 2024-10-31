@@ -26,13 +26,13 @@
 
 buildPythonPackage rec {
   pname = "jupyter-collaboration";
-  version = "2.1.4";
+  version = "3.0.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "jupyter_collaboration";
     inherit version;
-    hash = "sha256-YT3wrTQ8imuTK8zeJbwscHtawtqspf1oItGzMMfg5io=";
+    hash = "sha256-eewAsh/EI8DV4FNWgjEhT61RUbaYE6suOAny4bf1CCw=";
   };
 
   postPatch = ''
