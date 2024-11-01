@@ -13,13 +13,13 @@
 
 let
   pname = "pydicom";
-  version = "2.4.4";
+  version = "3.0.1";
 
   src = fetchFromGitHub {
     owner = "pydicom";
     repo = "pydicom";
     rev = "refs/tags/v${version}";
-    hash = "sha256-iJE1horEmdL7bKPn+NlZLgmtCbLZCZWQ8NjDBQPzXk8=";
+    hash = "sha256-SvRevQehRaSp+vCtJRQVEJiC5noIJS+bGG1/q4p7/XU=";
   };
 
   # Pydicom needs pydicom-data to run some tests. If these files aren't downloaded
@@ -37,14 +37,9 @@ buildPythonPackage {
 
   disabled = pythonOlder "3.10";
 
-  patches = [
-    # backport of https://github.com/pydicom/pydicom/commit/2513a20cc41743a42bdb86f4cbb4873899b7823c
-    ./pillow-10.1.0-compat.patch
-  ];
+  build-system = [ flit-core ];
 
-  nativeBuildInputs = [ flit-core ];
-
-  propagatedBuildInputs = [
+  dependencies = [
     numpy
     pillow
     setuptools
