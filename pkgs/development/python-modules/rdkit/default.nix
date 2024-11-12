@@ -50,7 +50,7 @@ let
 in
 buildPythonPackage rec {
   pname = "rdkit";
-  version = "2024.09.1";
+  version = "2024.09.2";
   pyproject = false;
 
   src =
@@ -61,7 +61,7 @@ buildPythonPackage rec {
       owner = "rdkit";
       repo = "rdkit";
       rev = "Release_${versionTag}";
-      hash = "sha256-UsyPlAJ8FISblF8szEmRqWansunIhW/gbEBZx13YM+A=";
+      hash = "sha256-29qiUvMR9T449A0nynBSpNbhwj2x/gAKio3RzCspe9o=";
     };
 
   unpackPhase = ''
