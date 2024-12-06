@@ -1,7 +1,7 @@
 {
   lib,
   buildPythonPackage,
-  fetchFromGitHub,
+  fetchPypi,
   pytestCheckHook,
   pythonOlder,
   alembic,
@@ -47,10 +47,9 @@ buildPythonPackage rec {
 
   disabled = pythonOlder "3.8";
 
-  src = fetchFromGitHub {
-    owner = "optuna";
-    repo = "optuna";
-    rev = "refs/tags/v${version}";
+  src = fetchPypi {
+    pname = "optuna_test";
+    inherit version;
     hash = "sha256-wIgYExxJEWFxEadBuCsxEIcW2/J6EVybW1jp83gIMjY=";
   };
 
