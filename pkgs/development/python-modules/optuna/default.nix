@@ -41,7 +41,7 @@
 }:
 
 buildPythonPackage rec {
-  pname = "optuna";
+  pname = "optuna_test";
   version = "4.1.0";
   pyproject = true;
 
@@ -55,8 +55,9 @@ buildPythonPackage rec {
 
   build-system = [
     setuptools
-    wheel
   ];
+
+  nativeBuildInputs = [ rustPlatforms.maturinBuildHook ];
 
   dependencies = [
     alembic
@@ -106,6 +107,7 @@ buildPythonPackage rec {
   '';
 
   nativeCheckInputs = [
+    pytest-cov
     fakeredis
     moto
     pytest-xdist
