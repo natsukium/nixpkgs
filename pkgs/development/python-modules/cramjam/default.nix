@@ -4,6 +4,10 @@
   fetchFromGitHub,
   rustPlatform,
   stdenv,
+  autoconf,
+  automake,
+  cmake,
+  libtool,
   libiconv,
   hypothesis,
   numpy,
@@ -13,27 +17,32 @@
 
 buildPythonPackage rec {
   pname = "cramjam";
-  version = "2.8.3";
+  version = "2.9.1";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "milesgranger";
     repo = "pyrus-cramjam";
-    rev = "refs/tags/v${version}";
-    hash = "sha256-1KD5/oZjfdXav1ZByQoyyiDSzbmY4VJsSJg/FtUFdDE=";
+    tag = "v${version}";
+    hash = "sha256-s+dKoZftI+aXcie1quAo/Xmlt1BQrzoCjwesDiaNABY=";
   };
 
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
-    hash = "sha256-Bp7EtyuLdLUfU3yvouNVE42klfqYt9QOwt+iGe521yI=";
+    hash = "sha256-AzoWeEXsKpO2AlP3d0PCQnNqJeNx8G829xnA7Ow2sQM=";
   };
 
-  buildAndTestSubdir = "cramjam-python";
+  build-system = [ rustPlatform.maturinBuildHook ];
 
-  nativeBuildInputs = with rustPlatform; [
-    cargoSetupHook
-    maturinBuildHook
+  nativeBuildInputs = [
+    autoconf
+    automake
+    cmake
+    rustPlatform.cargoSetupHook
+    libtool
   ];
+
+  dontUseCmakeConfigure = true;
 
   buildInputs = lib.optional stdenv.hostPlatform.isDarwin libiconv;
 
