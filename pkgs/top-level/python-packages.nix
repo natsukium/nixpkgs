@@ -9893,6 +9893,8 @@ self: super: with self; {
 
   opentelemetry-semantic-conventions = callPackage ../development/python-modules/opentelemetry-semantic-conventions { };
 
+  opentelemetry-semantic-conventions-ai = callPackage ../development/python-modules/opentelemetry-semantic-conventions-ai { };
+
   opentelemetry-sdk = callPackage ../development/python-modules/opentelemetry-sdk { };
 
   opentelemetry-test-utils = callPackage ../development/python-modules/opentelemetry-test-utils { };
