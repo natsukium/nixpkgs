@@ -34,7 +34,7 @@ buildPythonPackage rec {
     owner = "browser-use";
     repo = "browser-use";
     tag = version;
-    hash = "";
+    hash = "sha256-zZ5czvcuxjF0vAvNf7H6oOm+sCoSJ1Xld4nVz+5LVRA=";
   };
 
   build-system = [ hatchling ];
