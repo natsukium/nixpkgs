@@ -98,6 +98,7 @@ buildPythonPackage rec {
       nix-update --commit --version-regex 'langchain-community==(.*)' python3Packages.langchain-community
 
       # Extensions
+      nix-update --commit --version-regex 'langchain-anthropic==(.*)' python3Packages.langchain-anthropic
       nix-update --commit --version-regex 'langchain-aws==(.*)' python3Packages.langchain-aws
       nix-update --commit --version-regex 'langchain-azure-dynamic-sessions==(.*)' python3Packages.langchain-azure-dynamic-sessions
       nix-update --commit --version-regex 'langchain-chroma==(.*)' python3Packages.langchain-chroma
