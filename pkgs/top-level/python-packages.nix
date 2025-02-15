@@ -4666,6 +4666,8 @@ self: super: with self; {
 
   firetv = callPackage ../development/python-modules/firetv { };
 
+  fireworks-ai = callPackage ../development/python-modules/fireworks-ai { };
+
   first = callPackage ../development/python-modules/first { };
 
   fissix = callPackage ../development/python-modules/fissix { };
