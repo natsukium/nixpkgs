@@ -1938,6 +1938,8 @@ self: super: with self; {
 
   browser-cookie3 = callPackage ../development/python-modules/browser-cookie3 { };
 
+  browser-use = callPackage ../development/python-modules/browser-use { };
+
   brunt = callPackage ../development/python-modules/brunt { };
 
   bsddb3 = callPackage ../development/python-modules/bsddb3 { };
