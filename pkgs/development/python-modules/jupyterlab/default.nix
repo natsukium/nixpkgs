@@ -1,7 +1,7 @@
 {
   lib,
   buildPythonPackage,
-  fetchPypi,
+  fetchFromGitHub,
   hatch-jupyter-builder,
   hatchling,
   async-lru,
@@ -20,6 +20,8 @@
   tornado,
   traitlets,
   pythonOlder,
+  nodejs,
+  yarn-berry_3,
 }:
 
 buildPythonPackage rec {
@@ -27,10 +29,25 @@ buildPythonPackage rec {
   version = "4.4.1";
   pyproject = true;
 
-  src = fetchPypi {
-    inherit pname version;
-    hash = "sha256-x1xPMwVvvYTwsx60RiKgDHpfmBuFrf6xmKg3IfBGWAg=";
+  src = fetchFromGitHub {
+    owner = "jupyterlab";
+    repo = "jupyterlab";
+    tag = "v${version}";
+    hash = "sha256-j1K5aBLLGSWER3S0Vojrwdd+9T9vYbp1+XgxYD2NORY=";
   };
+
+  nativeBuildInputs = [
+    nodejs
+    yarn-berry_3.yarnBerryConfigHook
+  ];
+
+  missingHashes = ./missing-hashes.json;
+  offlineCache = yarn-berry_3.fetchYarnBerryDeps {
+    inherit src missingHashes;
+    hash = "sha256-Pv2uVGKcIDZxQ6s3w0zBrlF0ukaLkZ75ihAbjypnycg=";
+  };
+
+  env.HATCH_JUPYTER_BUILDER_SKIP_NPM = 1;
 
   build-system = [
     hatch-jupyter-builder
