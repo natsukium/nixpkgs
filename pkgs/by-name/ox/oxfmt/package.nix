@@ -16,8 +16,8 @@ let
   pnpmDepsHashes = {
     # pnpm lockfiles might include platform-specific optional dependencies,
     # resulting in different hashes per platform
-    linux = "sha256-khy4+JGYQ8gKmAATXGSGQRHTHjrLjy3P0+SEbMeVNWA=";
-    darwin = "sha256-ItOt5qxx0Sao4AS/r4IV/PeKy2y7IC1gzP35gKAAmQE=";
+    linux = "sha256-QqjdnZJiGf6n7i2b2hsYduX9xRmIxN7HsjC8kasOHtw=";
+    darwin = "sha256-atOt5qxx0Sao4AS/r4IV/PeKy2y7IC1gzP35gKAAmQE=";
   };
 in
 # Build with pnpm instead of buildRustPackage because Prettier integration
@@ -25,13 +25,13 @@ in
 # A pure Rust build would lack the Prettier plugin functionality.
 stdenv.mkDerivation (finalAttrs: {
   pname = "oxfmt";
-  version = "0.18.0";
+  version = "0.17.0";
 
   src = fetchFromGitHub {
     owner = "oxc-project";
     repo = "oxc";
     tag = "oxfmt_v${finalAttrs.version}";
-    hash = "sha256-AatmbW8UE8UbV533I2nhijHNlqIsgvtlE7X98uT7aTA=";
+    hash = "sha256-aatmbW8UE8UbV533I2nhijHNlqIsgvtlE7X98uT7aTA=";
   };
 
   # Remove patchedDependencies from both workspace and lockfile
@@ -43,12 +43,12 @@ stdenv.mkDerivation (finalAttrs: {
 
   cargoDeps = rustPlatform.fetchCargoVendor {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-4G52/8WZgNFM/vcHXBbtWabBZwWo3ZBVadFjOI2SmUk=";
+    hash = "sha256-aG52/8WZgNFM/vcHXBbtWabBZwWo3ZBVadFjOI2SmUk=";
   };
 
   pnpmDeps = pnpm_10.fetchDeps {
     inherit (finalAttrs) pname version src;
-    fetcherVersion = 1;
+    fetcherVersion = 2;
     hash = if stdenv.hostPlatform.isDarwin then pnpmDepsHashes.darwin else pnpmDepsHashes.linux;
     prePnpmInstall = finalAttrs.postPatch;
   };
